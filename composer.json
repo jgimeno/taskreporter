@@ -1,0 +1,27 @@
+{
+  "name": "jgimeno/task_reporter",
+  "description": "Task reporter for sending a report to my boss every journey.",
+  "minimum-stability": "dev",
+  "license": "open",
+  "authors": [
+    {
+      "name": "Jonathan Gimeno",
+      "email": "jgimeno@gmail.com"
+    }
+  ],
+  "require": {
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "JGimeno\\TaskReporter\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "JGimeno\\TaskReporter\\Tests\\": "tests/"
+    }
+  }
+}
