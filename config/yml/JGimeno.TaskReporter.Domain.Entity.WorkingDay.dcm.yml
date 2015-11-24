@@ -4,8 +4,14 @@ JGimeno\TaskReporter\Domain\Entity\WorkingDay:
   id:
     id:
       type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    date:
+      type: string
+      nullable: false
   oneToMany:
     tasks:
       targetEntity: JGimeno\TaskReporter\Domain\Entity\Task
       mappedBy: workingDay
-      cascade: ["persist", "merge"]
+      cascade: ["persist", "merge", "remove"]

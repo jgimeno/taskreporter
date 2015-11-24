@@ -21,12 +21,22 @@ class DoctrineWorkingDayRepository implements  WorkingDayRepositoryInterface
 
     public function getByDate(Carbon $date)
     {
-        return $this->em->getById($date->toDateString());
+        $repo = $this->em->getRepository('JGimeno\TaskReporter\Domain\Entity\WorkingDay');
+
+        $return = $repo->findOneByDate($date->toDateString());
+
+        return $return;
     }
 
     public function add(WorkingDay $workingDay)
     {
         $this->em->persist($workingDay);
+        $this->em->flush();
+    }
+
+    public function remove($workingDay)
+    {
+        $this->em->remove($workingDay);
         $this->em->flush();
     }
 }

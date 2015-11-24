@@ -18,7 +18,7 @@ class WorkingDayTest extends \PHPUnit_Framework_TestCase
     {
         $workingDay = new WorkingDay();
 
-        $this->assertEquals(Carbon::now('Europe/Madrid')->toDateString(), $workingDay->getId());
+        $this->assertEquals(Carbon::now('Europe/Madrid')->toDateString(), $workingDay->getDate());
     }
 
     public function testWorkingDayAcceptsTasks()

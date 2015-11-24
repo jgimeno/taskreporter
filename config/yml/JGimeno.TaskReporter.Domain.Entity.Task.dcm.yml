@@ -20,3 +20,4 @@ JGimeno\TaskReporter\Domain\Entity\Task:
       joinColumn:
         name: workingday_id
         referencedColumnName: id
+        type: string

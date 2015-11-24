@@ -23,6 +23,6 @@ class InMemoryWorkingDayRepository implements WorkingDayRepositoryInterface
 
     public function add(WorkingDay $workingDay)
     {
-        $this->workingDays[$workingDay->getId()] = $workingDay;
+        $this->workingDays[$workingDay->getDate()] = $workingDay;
     }
 }

@@ -7,14 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class WorkingDay
 {
-
     protected $id;
+
+    protected $date;
 
     private $tasks;
 
     public function __construct()
     {
-        $this->id = Carbon::now('Europe/Madrid')->toDateString();
+        $this->date = Carbon::now('Europe/Madrid')->toDateString();
         $this->tasks = new ArrayCollection();
     }
 
@@ -34,5 +35,15 @@ class WorkingDay
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
     }
 }

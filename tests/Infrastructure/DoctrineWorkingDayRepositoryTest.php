@@ -2,6 +2,7 @@
 
 namespace JGimeno\TaskReporter\Tests\Infrastructure;
 
+use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\Task;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
@@ -35,5 +36,12 @@ class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $repo = new DoctrineWorkingDayRepository($this->em);
         $repo->add($workingDay);
+
+        $expectedWorkingDate = $repo->getByDate(Carbon::now());
+
+        $this->assertEquals($expectedWorkingDate->getDate(), $workingDay->getDate());
+        $this->assertEquals($expectedWorkingDate->getId(), $workingDay->getId());
+
+        $repo->remove($workingDay);
     }
 }
