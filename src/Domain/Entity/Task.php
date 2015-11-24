@@ -1,6 +1,6 @@
 <?php
 
-namespace JGimeno\TaskReporter\Domain;
+namespace JGimeno\TaskReporter\Domain\Entity;
 
 use JGimeno\TaskReporter\Domain\Exception\TaskEmptyException;
 
@@ -40,7 +40,11 @@ class Task
     {
         $output = null;
         preg_match('~' . self::TICKET_DELIMITER . '(.*?)' . self::TICKET_DELIMITER . '~', $description, $output);
-        $this->ticket = $output[1];
+        if(isset($output[1])) {
+            $this->ticket = $output[1];
+        } else {
+            $this->ticket = $output;
+        }
     }
 
     /**

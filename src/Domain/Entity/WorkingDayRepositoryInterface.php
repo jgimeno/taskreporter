@@ -8,5 +8,5 @@ interface WorkingDayRepositoryInterface
 {
     public function getByDate(Carbon $date);
 
-    public function save(WorkingDay $workingDay);
+    public function add(WorkingDay $workingDay);
 }

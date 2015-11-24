@@ -3,7 +3,6 @@
 namespace JGimeno\TaskReporter\Domain\Entity;
 
 use Carbon\Carbon;
-use JGimeno\TaskReporter\Domain\Task;
 
 class WorkingDay
 {

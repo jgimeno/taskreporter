@@ -1,8 +1,8 @@
 <?php
 
-namespace JGimeno\TaskReporter\Tests\Domain\Task;
+namespace JGimeno\TaskReporter\Tests\Domain\Entity;
 
-use JGimeno\TaskReporter\Domain\Task;
+use JGimeno\TaskReporter\Domain\Entity\Task;
 
 class TaskTest extends \PHPUnit_Framework_TestCase
 {

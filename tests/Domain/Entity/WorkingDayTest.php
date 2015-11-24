@@ -4,7 +4,7 @@ namespace JGimeno\TaskReporter\Tests\Domain\Entity;
 
 use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
-use JGimeno\TaskReporter\Domain\Task;
+use JGimeno\TaskReporter\Domain\Entity\Task;
 
 class WorkingDayTest extends \PHPUnit_Framework_TestCase
 {

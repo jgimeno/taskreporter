@@ -5,7 +5,7 @@ namespace JGimeno\TaskReporter\App\Command;
 use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDayRepositoryInterface;
-use JGimeno\TaskReporter\Domain\Task;
+use JGimeno\TaskReporter\Domain\Entity\Task;
 
 class AddTaskHandler
 {
@@ -28,6 +28,6 @@ class AddTaskHandler
 
         $workingDay->addTask($task);
 
-        $this->workingDayRepo->save($workingDay);
+        $this->workingDayRepo->add($workingDay);
     }
 }
