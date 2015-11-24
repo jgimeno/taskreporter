@@ -10,7 +10,8 @@
     }
   ],
   "require": {
-    "nesbot/carbon": "~1.14"
+    "nesbot/carbon": "~1.14",
+    "doctrine/orm": "2.4.*"
   },
   "require-dev": {
     "phpunit/phpunit": "3.7.*"
