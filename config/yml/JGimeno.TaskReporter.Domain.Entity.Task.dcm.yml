@@ -1,0 +1,22 @@
+JGimeno\TaskReporter\Domain\Entity\Task:
+  type: entity
+  table: tasks
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    description:
+      type: string
+      nullable: false
+    ticket:
+      type: string
+      nullable: false
+  manyToOne:
+    workingDay:
+      targetEntity: JGimeno\TaskReporter\Domain\Entity\WorkingDay
+      inversedBy: tasks
+      joinColumn:
+        name: workingday_id
+        referencedColumnName: id

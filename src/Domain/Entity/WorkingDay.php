@@ -3,16 +3,19 @@
 namespace JGimeno\TaskReporter\Domain\Entity;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class WorkingDay
 {
+
     protected $id;
 
-    protected $tasks = array();
+    private $tasks;
 
     public function __construct()
     {
         $this->id = Carbon::now('Europe/Madrid')->toDateString();
+        $this->tasks = new ArrayCollection();
     }
 
     public function getId()
@@ -22,11 +25,14 @@ class WorkingDay
 
     public function addTask(Task $task)
     {
-        $this->tasks[] = $task;
+        $this->tasks->add($task);
     }
 
-    public function getTasks()
+    /**
+     * @param string $id
+     */
+    public function setId($id)
     {
-        return $this->tasks;
+        $this->id = $id;
     }
 }

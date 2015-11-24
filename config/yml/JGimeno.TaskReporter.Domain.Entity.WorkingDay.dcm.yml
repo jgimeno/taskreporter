@@ -1,0 +1,11 @@
+JGimeno\TaskReporter\Domain\Entity\WorkingDay:
+  type: entity
+  table: working_days
+  id:
+    id:
+      type: integer
+  oneToMany:
+    tasks:
+      targetEntity: JGimeno\TaskReporter\Domain\Entity\Task
+      mappedBy: workingDay
+      cascade: ["persist", "merge"]

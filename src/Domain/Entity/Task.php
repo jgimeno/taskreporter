@@ -7,8 +7,14 @@ use JGimeno\TaskReporter\Domain\Exception\TaskEmptyException;
 class Task
 {
     const TICKET_DELIMITER = '#';
+
+    protected $id;
+
     protected $description;
+
     protected $ticket;
+
+    protected $workingDay;
 
     public function __construct($task = null)
     {
@@ -20,7 +26,7 @@ class Task
     }
 
     /**
-     * Parses descrition extracting ticket if it exists.
+     * Parses description extracting ticket if it exists.
      *
      * @param $description
      */
@@ -43,7 +49,7 @@ class Task
         if(isset($output[1])) {
             $this->ticket = $output[1];
         } else {
-            $this->ticket = $output;
+            $this->ticket = "";
         }
     }
 
