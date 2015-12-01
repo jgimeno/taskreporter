@@ -1,4 +1,5 @@
-# README #
+# README 
+[![Build Status](https://travis-ci.org/jgimeno/taskreporter.svg?branch=master)](https://travis-ci.org/jgimeno/taskreporter)
 
 ## TaskReporter (DDD)
 
