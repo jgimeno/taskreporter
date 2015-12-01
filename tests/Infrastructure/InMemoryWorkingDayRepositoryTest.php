@@ -9,29 +9,77 @@ use JGimeno\TaskReporter\Infrastructure\InMemoryWorkingDayRepository;
 
 class InMemoryWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var InMemoryWorkingDayRepository
+     */
+    protected $inMemoryRepo;
 
+    /**
+     * @var WorkingDay
+     */
+    protected $workingDayWithTask;
+
+    /**
+     * Test that saving a task in the repo can be retrieved by date.
+     */
     public function testATaskCanBeInsertedAndRetrievedByDate()
     {
-        $task = new Task("Task test.");
+        $this->workingDayWithTask = $this->getWorkingDayWithTask();
 
-        $workingDay = new WorkingDay();
-        $workingDay->addTask($task);
+        $this->inMemoryRepo->add($this->workingDayWithTask);
 
-        $repo = new InMemoryWorkingDayRepository();
-        $repo->add($workingDay);
+        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now());
 
-        $workingDayFromRepo = $repo->getByDate(Carbon::now());
-
-        $this->assertEquals($workingDay, $workingDayFromRepo);
+        $this->assertEquals($this->workingDayWithTask, $workingDayFromRepo);
     }
 
+    /**
+     * Tests that getting a task from repo that does not exists by date returns null.
+     */
     public function testRepoReturnsNullIfNotWorkingDayWithThatDayExists()
     {
-        $repo = new InMemoryWorkingDayRepository();
-        $workingDay = $repo->getByDate(Carbon::now());
+        $this->workingDayWithTask = $this->getWorkingDayWithTask();
 
-        $this->assertNull($workingDay);
+        $this->inMemoryRepo->add($this->workingDayWithTask);
+
+        $nullWorkingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::tomorrow());
+
+        $this->assertNull($nullWorkingDayFromRepo);
     }
 
+    /**
+     * Tests that updating a repo saving and retrieving means that we have
+     * and updated version of the file.
+     */
+    public function testRepoUpdatesWorkDayIfNewIsAddedWithSameData()
+    {
+        $this->workingDayWithTask = $this->getWorkingDayWithTask();
+        $this->inMemoryRepo->add($this->workingDayWithTask);
 
+        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now());
+        $this->assertSame($this->workingDayWithTask, $workingDayFromRepo);
+
+        $workingDayFromRepo->addTask(new Task('Beber un poco de vino'));
+
+        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now());
+        $this->assertSame($this->workingDayWithTask, $workingDayFromRepo);
+    }
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->inMemoryRepo = new InMemoryWorkingDayRepository();
+        $this->workingDayWithTask = $this->getWorkingDayWithTask();
+    }
+
+    /**
+     * @return WorkingDay
+     */
+    private function getWorkingDayWithTask()
+    {
+        $workingDay = new WorkingDay();
+        $workingDay->addTask(new Task("Task test."));
+
+        return $workingDay;
+    }
 }
