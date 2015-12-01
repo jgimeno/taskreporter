@@ -16,40 +16,31 @@ class WorkingDayTest extends \PHPUnit_Framework_TestCase
 
     public function testInstanceOf()
     {
-        $workingDay = new WorkingDay(WorkingDayId::generate());
-        $this->assertInstanceOf('JGimeno\TaskReporter\Domain\Entity\WorkingDay', $workingDay);
+        $this->assertInstanceOf('JGimeno\TaskReporter\Domain\Entity\WorkingDay', $this->workingDay);
     }
 
     public function testTheIdOfAWorkingDayIsRelatedToItsDateOfCreation()
     {
-        $workingDay = new WorkingDay(WorkingDayId::generate());
-
-        $this->assertEquals(Carbon::now('Europe/Madrid')->toDateString(), $workingDay->getDate());
+        $this->assertEquals(Carbon::now('Europe/Madrid')->toDateString(), $this->workingDay->getDate());
     }
 
     public function testWorkingDayAcceptsTasks()
     {
         $task = new Task("Task day.");
-
-        $workindDay = new WorkingDay();
-        $workindDay->addTask($task);
+        $this->workingDay->addTask($task);
     }
 
     public function testWorkingDayCanReturnAllTasks()
     {
         $task = new Task("Task day.");
-
-        $workindDay = new WorkingDay();
-        $workindDay->addTask($task);
-
-        $tasks = $workindDay->getTasks();
-
+        $this->workingDay->addTask($task);
+        $tasks = $this->workingDay->getTasks();
         $this->assertCount(1, $tasks);
     }
 
     protected function setUp()
     {
         parent::setUp();
-
+        $this->workingDay = new WorkingDay(WorkingDayId::generate());
     }
 }

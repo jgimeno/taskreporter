@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDayRepositoryInterface;
 use JGimeno\TaskReporter\Domain\Entity\Task;
+use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 
 class AddTaskHandler
 {
@@ -23,7 +24,7 @@ class AddTaskHandler
         $workingDay = $this->workingDayRepo->getByDate(Carbon::now());
 
         if (!$workingDay) {
-            $workingDay = new WorkingDay();
+            $workingDay = new WorkingDay(WorkingDayId::generate());
         }
 
         $workingDay->addTask($task);

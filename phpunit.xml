@@ -23,4 +23,12 @@
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
         verbose="false">
+
+        <testsuites>
+                <testsuite name="TaskReporter Unit Test Suite">
+                        <directory>tests/</directory>
+                </testsuite>
+        </testsuites>
+
 </phpunit>
+

@@ -5,6 +5,7 @@ namespace JGimeno\TaskReporter\Tests\Infrastructure;
 use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\Task;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
+use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
 
 class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
@@ -64,7 +65,7 @@ class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private function getWorkingDayWithTask()
     {
-        $workingDay = new WorkingDay();
+        $workingDay = new WorkingDay(WorkingDayId::generate());
         $workingDay->addTask(new Task('Going to the bathroom.'));
 
         return $workingDay;

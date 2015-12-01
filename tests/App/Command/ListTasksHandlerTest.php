@@ -9,6 +9,6 @@ class ListTasksHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testListTasks()
     {
-        $nadler = new ListTasksHandler();
+//        $nadler = new ListTasksHandler();
     }
 }

@@ -7,6 +7,7 @@ use JGimeno\TaskReporter\App\Command\AddTask;
 use JGimeno\TaskReporter\App\Command\AddTaskHandler;
 use JGimeno\TaskReporter\Domain\Entity\Task;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
+use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 use JGimeno\TaskReporter\Infrastructure\InMemoryWorkingDayRepository;
 
 class AddTaskHandlerTest extends \PHPUnit_Framework_TestCase
@@ -21,14 +22,6 @@ class AddTaskHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public $workingDayRepo;
 
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->workingDayRepo = new InMemoryWorkingDayRepository();
-        $this->commandHandler = new AddTaskHandler($this->workingDayRepo);
-    }
-
-
     public function testInstanceOf()
     {
         $handler = new AddTaskHandler(new InMemoryWorkingDayRepository());
@@ -42,9 +35,16 @@ class AddTaskHandlerTest extends \PHPUnit_Framework_TestCase
 
         $workingDayFromRepo = $this->workingDayRepo->getByDate(Carbon::now());
 
-        $expectedWorkingDay = new WorkingDay();
+        $expectedWorkingDay = new WorkingDay(WorkingDayId::generate());
         $expectedWorkingDay->addTask(new Task("Task test"));
-        
-        $this->assertEquals($expectedWorkingDay, $workingDayFromRepo);
+
+        $this->assertEquals($expectedWorkingDay->getDate(), $workingDayFromRepo->getDate());
+    }
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->workingDayRepo = new InMemoryWorkingDayRepository();
+        $this->commandHandler = new AddTaskHandler($this->workingDayRepo);
     }
 }

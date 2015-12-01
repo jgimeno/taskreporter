@@ -5,6 +5,7 @@ namespace JGimeno\TaskReporter\Tests\Infrastructure;
 use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\Task;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
+use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 use JGimeno\TaskReporter\Infrastructure\InMemoryWorkingDayRepository;
 
 class InMemoryWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
@@ -31,6 +32,17 @@ class InMemoryWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
         $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now());
 
         $this->assertEquals($this->workingDayWithTask, $workingDayFromRepo);
+    }
+
+    /**
+     * @return WorkingDay
+     */
+    private function getWorkingDayWithTask()
+    {
+        $workingDay = new WorkingDay(WorkingDayId::generate());
+        $workingDay->addTask(new Task("Task test."));
+
+        return $workingDay;
     }
 
     /**
@@ -70,16 +82,5 @@ class InMemoryWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->inMemoryRepo = new InMemoryWorkingDayRepository();
         $this->workingDayWithTask = $this->getWorkingDayWithTask();
-    }
-
-    /**
-     * @return WorkingDay
-     */
-    private function getWorkingDayWithTask()
-    {
-        $workingDay = new WorkingDay();
-        $workingDay->addTask(new Task("Task test."));
-
-        return $workingDay;
     }
 }
