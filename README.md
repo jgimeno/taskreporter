@@ -21,4 +21,35 @@ Don't you think is a good idea to start developing since the beginning and
 
 ### Usage
 
+Once you clone the repo execute doctrine command to create sqlite internal database:
+
+```
+vendor/bin/doctrine orm:schema-tool:update --force
+```
+
+Then you can start playing with the commands:
+
+#### Add a new task
+
+You can a dd a new task with the command.
+
+```
+php console.php taskReporter:add "New task."
+```
+
+If you have a task with a ticket id you can add it like this:
+
+```
+php console.php taskReporter:add "#123# The task"
+```
+
+#### Listing the tasks
+
+You can list inserted tasks with:
+```
+php console.php taskReporter:list
+```
+
 TODO
+
+Still we cannot send the report by mail :D
