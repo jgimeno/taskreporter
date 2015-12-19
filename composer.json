@@ -11,7 +11,7 @@
   ],
   "require": {
     "nesbot/carbon": "~1.14",
-    "doctrine/orm": "2.4.*",
+    "doctrine/orm": "2.5.*",
     "symfony/console": "2.8.*",
     "ramsey/uuid": "^3.0"
   },
