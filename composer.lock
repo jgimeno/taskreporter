@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4b92969b8e0a21ba533eef687d1a4b10",
-    "content-hash": "d0db6b69616662188dd9ca7ed24fc5a2",
+    "hash": "a577883e25b52530a70f9e6e0fcd122f",
+    "content-hash": "b0a1bba795885a0b78695730cd61998e",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -726,26 +726,26 @@
         },
         {
             "name": "symfony/console",
-            "version": "2.8.x-dev",
+            "version": "3.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "ae255d9d241893cb29cbc19e9f68774991448753"
+                "reference": "bd0522df9c654ae9e56692e6c8ab8040439e225c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/ae255d9d241893cb29cbc19e9f68774991448753",
-                "reference": "ae255d9d241893cb29cbc19e9f68774991448753",
+                "url": "https://api.github.com/repos/symfony/console/zipball/bd0522df9c654ae9e56692e6c8ab8040439e225c",
+                "reference": "bd0522df9c654ae9e56692e6c8ab8040439e225c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9",
+                "php": ">=5.5.9",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/event-dispatcher": "~2.1|~3.0.0",
-                "symfony/process": "~2.1|~3.0.0"
+                "symfony/event-dispatcher": "~2.8|~3.0",
+                "symfony/process": "~2.8|~3.0"
             },
             "suggest": {
                 "psr/log": "For using the console logger",
@@ -755,7 +755,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -782,7 +782,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-12-15 01:39:37"
+            "time": "2015-12-15 02:03:07"
         },
         {
             "name": "symfony/polyfill-mbstring",
