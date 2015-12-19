@@ -1,5 +1,6 @@
 # README 
 [![Build Status](https://travis-ci.org/jgimeno/taskreporter.svg?branch=master)](https://travis-ci.org/jgimeno/taskreporter)
+[![Coverage Status](https://coveralls.io/repos/jgimeno/taskreporter/badge.svg?branch=master&service=github)](https://coveralls.io/github/jgimeno/taskreporter?branch=master)
 
 ## TaskReporter (DDD)
 
