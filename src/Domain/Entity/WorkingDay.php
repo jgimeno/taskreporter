@@ -13,8 +13,14 @@ class WorkingDay
      */
     protected $id;
 
+    /**
+     * @var string
+     */
     protected $date;
 
+    /**
+     * @var ArrayCollection
+     */
     private $tasks;
 
     public function __construct(WorkingDayId $id)
@@ -22,22 +28,6 @@ class WorkingDay
         $this->id = $id;
         $this->date = Carbon::now('Europe/Madrid')->toDateString();
         $this->tasks = new ArrayCollection();
-    }
-
-    /**
-     * @return WorkingDayId
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     public function addTask(Task $task)
