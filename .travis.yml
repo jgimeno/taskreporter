@@ -11,10 +11,5 @@ before_script:
   - composer install
   - vendor/bin/doctrine orm:schema-tool:update --force
 
-before_install:
-  - pip install codecov
-after_success:
-  - codecov
-
 
 script: phpunit --configuration phpunit.xml
