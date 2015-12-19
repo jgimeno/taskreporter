@@ -46,10 +46,11 @@ php console.php taskReporter:add "#123# The task"
 #### Listing the tasks
 
 You can list inserted tasks with:
+
 ```
 php console.php taskReporter:list
 ```
 
-TODO
+###TODO
 
 Still we cannot send the report by mail :D
