@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDayRepositoryInterface;
+use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 
 class DoctrineWorkingDayRepository implements  WorkingDayRepositoryInterface
 {
@@ -38,5 +39,13 @@ class DoctrineWorkingDayRepository implements  WorkingDayRepositoryInterface
     {
         $this->em->remove($workingDay);
         $this->em->flush();
+    }
+
+    /**
+     * @return WorkingDayId
+     */
+    public function nextIdentity()
+    {
+        return WorkingDayId::generate();
     }
 }

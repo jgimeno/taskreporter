@@ -46,7 +46,7 @@ class Task
     {
         $output = null;
         preg_match('~' . self::TICKET_DELIMITER . '(.*?)' . self::TICKET_DELIMITER . '~', $description, $output);
-        if(isset($output[1])) {
+        if (isset($output[1])) {
             $this->ticket = $output[1];
         } else {
             $this->ticket = "";
@@ -73,5 +73,13 @@ class Task
     public function getTicket()
     {
         return $this->ticket;
+    }
+
+    /**
+     * @param mixed $workingDay
+     */
+    public function setWorkingDay($workingDay)
+    {
+        $this->workingDay = $workingDay;
     }
 }

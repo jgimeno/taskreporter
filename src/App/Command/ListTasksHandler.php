@@ -23,11 +23,7 @@ class ListTasksHandler
     public function handle(ListTasks $command)
     {
         $workingDay = $this->repo->getByDate(Carbon::now());
-
         $tasks = $workingDay->getTasks();
-
-        foreach ($tasks as $task) {
-            print_r($tasks);
-        }
+        return $tasks;
     }
 }

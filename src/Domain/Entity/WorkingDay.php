@@ -42,6 +42,8 @@ class WorkingDay
 
     public function addTask(Task $task)
     {
+        $task->setWorkingDay($this);
+
         $this->tasks->add($task);
     }
 

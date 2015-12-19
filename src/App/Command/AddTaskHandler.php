@@ -24,7 +24,7 @@ class AddTaskHandler
         $workingDay = $this->workingDayRepo->getByDate(Carbon::now());
 
         if (!$workingDay) {
-            $workingDay = new WorkingDay(WorkingDayId::generate());
+            $workingDay = new WorkingDay($this->workingDayRepo->nextIdentity());
         }
 
         $workingDay->addTask($task);

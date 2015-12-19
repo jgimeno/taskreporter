@@ -5,6 +5,7 @@ namespace JGimeno\TaskReporter\Tests\Infrastructure;
 use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\Task;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
+use JGimeno\TaskReporter\Domain\Entity\WorkingDayRepositoryInterface;
 use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
 
@@ -21,6 +22,16 @@ class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
      * @var DoctrineWorkingDayRepository
      */
     protected $repo;
+
+    protected function setUp()
+    {
+        global $em;
+        parent::setUp();
+        $this->em = $em;
+
+        $this->repo = new DoctrineWorkingDayRepository($this->em);
+        $this->workingDayWithTask = $this->getWorkingDayWithTask();
+    }
 
     /**
      * Tests that getting a task from repo that does not exists by date returns null.
@@ -45,19 +56,8 @@ class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
         $workingDayFromRepo = $this->repo->getByDate(Carbon::now());
 
         $this->assertEquals($workingDayFromRepo->getDate(), $this->workingDayWithTask->getDate());
-        $this->assertEquals($workingDayFromRepo->getId(), $this->workingDayWithTask->getId());
 
         $this->repo->remove($this->workingDayWithTask);
-    }
-
-    protected function setUp()
-    {
-        global $em;
-        parent::setUp();
-        $this->em = $em;
-
-        $this->workingDayWithTask = $this->getWorkingDayWithTask();
-        $this->repo = new DoctrineWorkingDayRepository($this->em);
     }
 
     /**
@@ -65,9 +65,8 @@ class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private function getWorkingDayWithTask()
     {
-        $workingDay = new WorkingDay(WorkingDayId::generate());
+        $workingDay = new WorkingDay($this->repo->nextIdentity());
         $workingDay->addTask(new Task('Going to the bathroom.'));
-
         return $workingDay;
     }
 }
