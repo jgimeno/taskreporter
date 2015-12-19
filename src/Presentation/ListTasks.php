@@ -2,7 +2,8 @@
 
 namespace JGimeno\TaskReporter\Presentation;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use JGimeno\TaskReporter\Domain\Entity\Task;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -26,10 +27,22 @@ class ListTasks
         $this->output = $output;
     }
 
-    public function render($tasks)
+    /**
+     * @param Collection $tasks
+     */
+    public function render(Collection $tasks)
     {
         foreach ($tasks as $task) {
-            $this->output->writeln($task->getDescription());
+            $line = "";
+
+            /* @var $task Task */
+            if ($task->getTicket()) {
+                $line = "(" . $task->getTicket() . ") ";
+            }
+
+            $line .= $task->getDescription();
+
+            $this->output->writeln($line);
         }
     }
 }

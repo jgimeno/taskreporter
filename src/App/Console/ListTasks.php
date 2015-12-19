@@ -2,14 +2,11 @@
 
 namespace JGimeno\TaskReporter\App\Console;
 
-use JGimeno\TaskReporter\App\Command\AddTask;
-use JGimeno\TaskReporter\App\Command\AddTaskHandler;
 use JGimeno\TaskReporter\App\Command\ListTasks as ListTasksCommand;
 use JGimeno\TaskReporter\App\Command\ListTasksHandler;
 use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
 use JGimeno\TaskReporter\Presentation\ListTasks as ListTasksPresentation;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
