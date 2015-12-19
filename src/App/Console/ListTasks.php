@@ -7,6 +7,7 @@ use JGimeno\TaskReporter\App\Command\AddTaskHandler;
 use JGimeno\TaskReporter\App\Command\ListTasks as ListTasksCommand;
 use JGimeno\TaskReporter\App\Command\ListTasksHandler;
 use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
+use JGimeno\TaskReporter\Presentation\ListTasks as ListTasksPresentation;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,11 +25,11 @@ class ListTasks extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         global $em; // Todo better injection of entity manager.
+
         $commandHandler = new ListTasksHandler(new DoctrineWorkingDayRepository($em));
         $tasks = $commandHandler->handle(new ListTasksCommand());
 
-        foreach ($tasks as $task) {
-            $output->writeln($task->getDescription());
-        }
+        $listTasksPresentation = new ListTasksPresentation($output);
+        $listTasksPresentation->render($tasks);
     }
 }
