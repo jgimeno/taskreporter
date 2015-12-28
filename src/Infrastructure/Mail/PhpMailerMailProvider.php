@@ -4,7 +4,9 @@ namespace JGimeno\TaskReporter\Infrastructure\Mail;
 
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Domain\Service\MailProviderInterface;
+use JGimeno\TaskReporter\Infrastructure\Exception\MailProviderException;
 use PHPMailer\PHPMailer\PHPMailer;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class PhpMailerMailProvider implements MailProviderInterface
 {
@@ -33,14 +35,13 @@ class PhpMailerMailProvider implements MailProviderInterface
     /**
      * Sends a report of the working day.
      * @param WorkingDay $day
+     * @throws MailProviderException
+     * @throws \PHPMailer\PHPMailer\Exception
      */
     public function sendReportOf(WorkingDay $day)
     {
         if (!$this->mailClient->send()) {
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $this->mailClient->ErrorInfo;
-        } else {
-            echo 'Message has been sent';
+            throw new MailProviderException($this->mailClient->ErrorInfo);
         }
     }
 
