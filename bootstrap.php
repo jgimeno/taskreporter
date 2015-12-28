@@ -1,18 +1,17 @@
 <?php
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Tools\Setup;
+use JGimeno\TaskReporter\ServiceProvider\CommandServiceProvider;
+use JGimeno\TaskReporter\ServiceProvider\ConsoleServiceProvider;
+use JGimeno\TaskReporter\ServiceProvider\RepositoryServiceProvider;
+use League\Container\Container;
 
 require_once 'vendor/autoload.php';
 
-$isDevMode = true;
+$container = new Container();
 
-$config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/config/yml/"), $isDevMode);
+$container->share('isDevMode', true);
 
-$conn = array(
-    'driver' => 'pdo_sqlite',
-    'path' => __DIR__ . '/db.sqlite',
-);
-
-$em = EntityManager::create($conn, $config);
-
+$container
+    ->addServiceProvider(new RepositoryServiceProvider())
+    ->addServiceProvider(new CommandServiceProvider())
+    ->addServiceProvider(new ConsoleServiceProvider());
