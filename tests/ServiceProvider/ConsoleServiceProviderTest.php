@@ -25,7 +25,6 @@ class ConsoleServiceProviderTest extends \PHPUnit_Framework_TestCase
     public function testListTasksConsoleIsCreatedWithTheCorrectCommandHandler()
     {
         $listTasksConsole = new ListTasks(
-            'taskReporter:list',
             new ListTasksHandler(new DoctrineWorkingDayRepository($this->container->get('entityManager')))
         );
 
@@ -39,7 +38,6 @@ class ConsoleServiceProviderTest extends \PHPUnit_Framework_TestCase
     public function testAddTaskConsoleIsCreatedWithTheCorrectCommandHandler()
     {
         $addTasksConsole = new CreateTask(
-            'taskReporter:add',
             new AddTaskHandler(new DoctrineWorkingDayRepository($this->container->get('entityManager')))
         );
 
