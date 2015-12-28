@@ -5,8 +5,6 @@ namespace JGimeno\TaskReporter\Tests\Infrastructure;
 use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\Task;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
-use JGimeno\TaskReporter\Domain\Entity\WorkingDayRepositoryInterface;
-use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
 
 class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
@@ -25,9 +23,11 @@ class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        global $em;
+        global $container;
+
         parent::setUp();
-        $this->em = $em;
+
+        $this->em = $container->get('entityManager');
 
         $this->repo = new DoctrineWorkingDayRepository($this->em);
         $this->workingDayWithTask = $this->getWorkingDayWithTask();
