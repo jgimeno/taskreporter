@@ -17,16 +17,17 @@ class ListTasks extends Command
     private $commandHandler;
 
 
-    public function __construct($name, ListTasksHandler $listTasksHandler)
+    public function __construct(ListTasksHandler $listTasksHandler)
     {
-        parent::__construct($name);
+        parent::__construct();
 
         $this->commandHandler = $listTasksHandler;
     }
 
     protected function configure()
     {
-        $this->setDescription('Lists the tasks of the day.');
+        $this->setDescription('Lists the tasks of the day.')
+            ->setName('taskReporter:list');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

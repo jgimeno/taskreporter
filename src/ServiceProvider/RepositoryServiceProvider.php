@@ -5,11 +5,9 @@ namespace JGimeno\TaskReporter\ServiceProvider;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use League\Container\ServiceProvider\BootableServiceProviderInterface;
 
-class RepositoryServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
+class RepositoryServiceProvider extends AbstractServiceProvider
 {
-
     private $entityManager;
 
     /**
@@ -20,7 +18,14 @@ class RepositoryServiceProvider extends AbstractServiceProvider implements Boota
         'JGimeno\TaskReporter\Entity\WorkingDayRepositoryInterface'
     ];
 
-    public function boot()
+    /**
+     * Use the register method to register items with the container via the
+     * protected $this->container property or the `getContainer` method
+     * from the ContainerAwareTrait.
+     *
+     * @return void
+     */
+    public function register()
     {
         $config = Setup::createYAMLMetadataConfiguration(
             array(__DIR__."/../../config/yml/"),
@@ -38,18 +43,7 @@ class RepositoryServiceProvider extends AbstractServiceProvider implements Boota
         );
 
         $this->getContainer()->add('entityManager', $this->entityManager);
-    }
 
-
-    /**
-     * Use the register method to register items with the container via the
-     * protected $this->container property or the `getContainer` method
-     * from the ContainerAwareTrait.
-     *
-     * @return void
-     */
-    public function register()
-    {
         $this->getContainer()
             ->add(
                 'JGimeno\TaskReporter\Entity\WorkingDayRepositoryInterface',

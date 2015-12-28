@@ -1,6 +1,5 @@
 <?php
 
-
 use JGimeno\TaskReporter\ServiceProvider\CommandServiceProvider;
 use JGimeno\TaskReporter\ServiceProvider\ConsoleServiceProvider;
 use JGimeno\TaskReporter\ServiceProvider\RepositoryServiceProvider;

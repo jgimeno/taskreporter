@@ -27,11 +27,9 @@ class ConsoleServiceProvider extends AbstractServiceProvider
     public function register()
     {
         $this->getContainer()->add('JGimeno\TaskReporter\App\Console\CreateTask')
-            ->withArgument('taskReporter:add')
             ->withArgument('JGimeno\TaskReporter\App\Command\AddTaskHandler');
 
         $this->getContainer()->add('JGimeno\TaskReporter\App\Console\ListTasks')
-            ->withArgument('taskReporter:list')
             ->withArgument('JGimeno\TaskReporter\App\Command\ListTasksHandler');
     }
 }

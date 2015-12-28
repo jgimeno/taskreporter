@@ -11,17 +11,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateTask extends Command
 {
-
     /**
      * @var AddTaskHandler
      */
     private $commandHandler;
 
-
-    public function __construct($name, AddTaskHandler $addTaskHandler)
+    public function __construct(AddTaskHandler $addTaskHandler)
     {
-        parent::__construct($name);
-
+        parent::__construct();
         $this->commandHandler = $addTaskHandler;
     }
 
@@ -29,6 +26,7 @@ class CreateTask extends Command
     {
         $this
             ->setDescription('Add a task to your daily report.')
+            ->setName('taskReporter:add')
             ->addArgument(
                 'task',
                 InputArgument::REQUIRED,
