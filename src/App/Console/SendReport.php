@@ -16,15 +16,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SendReport extends Command
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct()
     {
         parent::__construct();
-        $this->container = $container;
     }
 
     protected function configure()
@@ -37,7 +32,11 @@ class SendReport extends Command
     {
         try {
 
-            $commandHandler = $this->container->get('JGimeno\TaskReporter\App\Command\SendReportHandler');
+            $commandHandler = $this
+                ->getApplication()
+                ->getContainer()
+                ->get('JGimeno\TaskReporter\App\Command\SendReportHandler');
+
             $commandHandler->handle(new SendReportCommand());
 
         } catch (InfrastructureException $ex) {
