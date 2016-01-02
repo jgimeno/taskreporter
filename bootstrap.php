@@ -2,6 +2,7 @@
 
 use JGimeno\TaskReporter\ServiceProvider\CommandServiceProvider;
 use JGimeno\TaskReporter\ServiceProvider\ConsoleServiceProvider;
+use JGimeno\TaskReporter\ServiceProvider\MailServiceProvider;
 use JGimeno\TaskReporter\ServiceProvider\RepositoryServiceProvider;
 use League\Container\Container;
 
@@ -14,4 +15,5 @@ $container->share('isDevMode', true);
 $container
     ->addServiceProvider(new RepositoryServiceProvider())
     ->addServiceProvider(new CommandServiceProvider())
-    ->addServiceProvider(new ConsoleServiceProvider());
+    ->addServiceProvider(new ConsoleServiceProvider())
+    ->addServiceProvider(new MailServiceProvider());

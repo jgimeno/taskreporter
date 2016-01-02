@@ -21,6 +21,7 @@ class SendReportHandler
     /**
      * SendReportHandler constructor.
      * @param MailProviderInterface $mailProvider
+     * @param WorkingDayRepositoryInterface $repo
      */
     public function __construct(MailProviderInterface $mailProvider, WorkingDayRepositoryInterface $repo)
     {

@@ -12,7 +12,8 @@ class CommandServiceProvider extends AbstractServiceProvider
      */
     protected $provides = [
         'JGimeno\TaskReporter\App\Command\ListTasksHandler',
-        'JGimeno\TaskReporter\App\Command\AddTaskHandler'
+        'JGimeno\TaskReporter\App\Command\AddTaskHandler',
+        'JGimeno\TaskReporter\App\Command\SendReportHandler'
     ];
 
     /**
@@ -30,5 +31,12 @@ class CommandServiceProvider extends AbstractServiceProvider
         $this->getContainer()->add('JGimeno\TaskReporter\App\Command\AddTaskHandler')
             ->withArgument('JGimeno\TaskReporter\Entity\WorkingDayRepositoryInterface');
 
+        $this->getContainer()->add('JGimeno\TaskReporter\App\Command\SendReportHandler')
+            ->withArguments(
+                [
+                    'JGimeno\TaskReporter\Domain\Service\MailProviderInterface',
+                    'JGimeno\TaskReporter\Entity\WorkingDayRepositoryInterface'
+                ]
+            );
     }
 }

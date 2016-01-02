@@ -15,4 +15,11 @@ class ValueObject
     {
         return (is_null($this->value) || $this->value === '');
     }
+
+    public function __toString()
+    {
+        return (string)$this->value;
+    }
+
+
 }

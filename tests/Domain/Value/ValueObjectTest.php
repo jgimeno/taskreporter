@@ -53,4 +53,10 @@ class ValueObjectTest extends \PHPUnit_Framework_TestCase
 
         return $set;
     }
+
+    public function testTheValueIsConvertedToStringWhenCasted()
+    {
+        $value = new ValueObject('hola');
+        $this->assertEquals("hola", $value);
+    }
 }
