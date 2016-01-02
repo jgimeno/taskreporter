@@ -17,7 +17,7 @@ class PortNumber extends ValueObject
     /**
      * @param int $portNumber
      * @return mixed
-     * @throws InvalidNativeArgumentException
+     * @throws ValueObjectException
      */
     protected function sanitize($portNumber)
     {

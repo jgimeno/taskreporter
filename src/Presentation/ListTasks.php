@@ -32,10 +32,10 @@ class ListTasks
      */
     public function render(Collection $tasks)
     {
+        /* @var $task Task */
         foreach ($tasks as $task) {
             $line = "";
 
-            /* @var $task Task */
             if ($task->getTicket()) {
                 $line = "(" . $task->getTicket() . ") ";
             }

@@ -2,6 +2,9 @@
 
 namespace JGimeno\TaskReporter\Infrastructure\Mail;
 
+use JGimeno\TaskReporter\Domain\Value\Password;
+use JGimeno\TaskReporter\Domain\Value\PortNumber;
+
 class MailOptions
 {
     private $host;
@@ -17,8 +20,12 @@ class MailOptions
 
     /**
      * MailOptions constructor.
+     * @param $host
+     * @param $userName
+     * @param $password
+     * @param PortNumber $port
      */
-    public function __construct($host, $userName, $password, $port = 587)
+    public function __construct($host, $userName, Password $password, PortNumber $port = null)
     {
         $this->host = $host;
         $this->userName = $userName;

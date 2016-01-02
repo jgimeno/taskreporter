@@ -4,6 +4,7 @@ namespace JGimeno\TaskReporter\App\Console;
 
 use JGimeno\TaskReporter\App\Command\SendReport as SendReportCommand;
 use JGimeno\TaskReporter\App\Command\SendReportHandler;
+use JGimeno\TaskReporter\Infrastructure\Exception\InfrastructureException;
 use JGimeno\TaskReporter\Infrastructure\Mail\MailOptions;
 use JGimeno\TaskReporter\Infrastructure\Mail\PhpMailerMailProvider;
 use League\Container\ContainerInterface;
@@ -33,13 +34,18 @@ class SendReport extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $mailOptions = new MailOptions("", "", "");
+        try {
+            $mailOptions = new MailOptions("", "", "");
 
-        $commandHandler = new SendReportHandler(
-            new PhpMailerMailProvider(new PHPMailer(), $mailOptions),
-            $this->container->get('JGimeno\TaskReporter\Entity\WorkingDayRepositoryInterface')
-        );
+            $commandHandler = new SendReportHandler(
+                new PhpMailerMailProvider(new PHPMailer(), $mailOptions),
+                $this->container->get('JGimeno\TaskReporter\Entity\WorkingDayRepositoryInterface')
+            );
 
-        $commandHandler->handle(new SendReportCommand());
+            $commandHandler->handle(new SendReportCommand());
+
+        } catch (InfrastructureException $ex) {
+            $output->writeln('<error>' . $ex->getMessage() . '</error>');
+        }
     }
 }

@@ -18,4 +18,9 @@ class WorkingDayId extends ValueObject
     {
         return new self(Uuid::uuid4());
     }
+
+    public function __toString()
+    {
+        return $this->value->toString();
+    }
 }

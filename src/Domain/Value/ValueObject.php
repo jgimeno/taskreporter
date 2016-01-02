@@ -6,13 +6,13 @@ class ValueObject
 {
     protected $value;
 
-    public function __construct($value)
+    public function __construct($value = null)
     {
         $this->value = $value;
     }
 
-    public function __toString()
+    public function isEmpty()
     {
-        return $this->value->toString();
+        return (is_null($this->value) || $this->value === '');
     }
 }
