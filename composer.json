@@ -20,7 +20,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "5.1.*",
-    "satooshi/php-coveralls": "dev-master"
+    "satooshi/php-coveralls": "dev-master",
+    "mikey179/vfsStream": "^1.6"
   },
   "autoload": {
     "psr-4": {

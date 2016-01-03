@@ -65,7 +65,7 @@ class YamlConfigurationProvider implements ConfigurationProviderInterface
 
         foreach ($itemSpace as $key) {
             if (!array_key_exists($key, $result)) {
-                throw new Exception();
+                throw new Exception('Requested config item does not exist: '.$item);
             }
 
             $result = $result[$key];
@@ -77,8 +77,8 @@ class YamlConfigurationProvider implements ConfigurationProviderInterface
 
     private function checkMaxNesting($item)
     {
-        if (substr_count($item, self::SPACE_DELIMITER) > self::MAX_NESTING) {
-            throw new Exception();
+        if (substr_count($item, self::SPACE_DELIMITER) >= self::MAX_NESTING) {
+            throw new Exception('Maximum nesting in config file is '.self::MAX_NESTING);
         }
     }
 

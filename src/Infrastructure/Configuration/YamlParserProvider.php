@@ -4,6 +4,7 @@ namespace JGimeno\TaskReporter\Infrastructure\Configuration;
 
 use JGimeno\TaskReporter\Domain\Service\YamlParserInterface;
 use Symfony\Component\Yaml\Parser;
+
 class YamlParserProvider implements YamlParserInterface
 {
 

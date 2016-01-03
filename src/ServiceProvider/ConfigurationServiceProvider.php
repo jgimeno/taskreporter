@@ -2,7 +2,9 @@
 
 namespace JGimeno\TaskReporter\ServiceProvider;
 
+use JGimeno\TaskReporter\Infrastructure\Configuration\YamlParserProvider;
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use Symfony\Component\Yaml\Parser;
 
 class ConfigurationServiceProvider extends AbstractServiceProvider
 {
@@ -20,7 +22,9 @@ class ConfigurationServiceProvider extends AbstractServiceProvider
 
         $this->getContainer()->add(
             'JGimeno\TaskReporter\Domain\Service\YamlParserInterface',
-            'JGimeno\TaskReporter\Infrastructure\Configuration\YamlParserProvider'
+            function () {
+                return new YamlParserProvider(new Parser());
+            }
         );
 
         $this->getContainer()->share(
