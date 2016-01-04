@@ -28,7 +28,7 @@ class RepositoryServiceProvider extends AbstractServiceProvider
     public function register()
     {
         $config = Setup::createYAMLMetadataConfiguration(
-            array(__DIR__."/../../config/yml/"),
+            array(__DIR__."/../../config/orm/"),
             $this->container->get('isDevMode')
         );
 
