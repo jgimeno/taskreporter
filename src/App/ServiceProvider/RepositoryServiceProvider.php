@@ -1,6 +1,6 @@
 <?php
 
-namespace JGimeno\TaskReporter\ServiceProvider;
+namespace JGimeno\TaskReporter\App\ServiceProvider;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
@@ -28,13 +28,13 @@ class RepositoryServiceProvider extends AbstractServiceProvider
     public function register()
     {
         $config = Setup::createYAMLMetadataConfiguration(
-            array(__DIR__."/../../config/orm/"),
+            array(__DIR__."/../../../config/orm/"),
             $this->container->get('isDevMode')
         );
 
         $conn = array(
             'driver' => 'pdo_sqlite',
-            'path' => __DIR__.'/../../db.sqlite',
+            'path' => __DIR__.'/../../../db.sqlite',
         );
 
         $this->entityManager = EntityManager::create(

@@ -2,8 +2,7 @@
 
 namespace ServiceProvider;
 
-
-use JGimeno\TaskReporter\ServiceProvider\ConfigurationServiceProvider;
+use JGimeno\TaskReporter\App\ServiceProvider\ConfigurationServiceProvider;
 use League\Container\Container;
 
 class ConfigurationServiceProviderTest extends \PHPUnit_Framework_TestCase

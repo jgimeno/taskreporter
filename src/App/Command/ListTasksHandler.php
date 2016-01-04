@@ -23,10 +23,10 @@ class ListTasksHandler
     }
 
     /**
-     * @param ListTasks $command
      * @return \Doctrine\Common\Collections\ArrayCollection
+     * @throws EmptyWorkingDayException
      */
-    public function handle(ListTasks $command)
+    public function handle()
     {
         $workingDay = $this->repo->getByDate(Carbon::now());
 

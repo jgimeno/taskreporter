@@ -1,6 +1,6 @@
 <?php
 
-namespace JGimeno\TaskReporter\ServiceProvider;
+namespace JGimeno\TaskReporter\App\ServiceProvider;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use JGimeno\TaskReporter\App\Console;

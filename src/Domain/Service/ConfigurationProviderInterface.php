@@ -2,7 +2,6 @@
 
 namespace JGimeno\TaskReporter\Domain\Service;
 
-
 interface ConfigurationProviderInterface
 {
     /**

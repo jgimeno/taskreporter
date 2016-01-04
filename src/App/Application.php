@@ -19,7 +19,6 @@ class Application extends BaseApplication
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-
         parent::__construct(self::APP_NAME, self::VERSION);
     }
 
