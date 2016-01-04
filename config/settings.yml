@@ -1,5 +1,7 @@
 mail:
-  host: caca
-  username: pedo
-  password: pis
-  port: 32121
+  host: smtp.gmail.com
+  username: user
+  password: password
+  from: email@gmail.com
+  to:
+    - email@gmail.com

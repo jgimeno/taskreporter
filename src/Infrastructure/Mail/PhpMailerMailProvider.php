@@ -41,6 +41,8 @@ class PhpMailerMailProvider implements MailProviderInterface
     public function sendReportOf(WorkingDay $day)
     {
         try {
+            $this->renderMail($day);
+
             $this->mailClient->send();
         } catch (Exception $ex) {
             throw new MailProviderException($ex->errorMessage());
@@ -59,13 +61,22 @@ class PhpMailerMailProvider implements MailProviderInterface
         $this->mailClient->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
         $this->mailClient->Port = $this->options->getPort();
 
-        $this->mailClient->setFrom('jgimeno@gmail.com', 'Mailer');
+        $this->mailClient->setFrom($this->options->getFrom(), 'Mailer');
         $this->mailClient->addAddress('jgimeno@gmail.com', 'Joe User');     // Add a recipient
 
         $this->mailClient->Username = $this->options->getUserName();                 // SMTP username
         $this->mailClient->Password = $this->options->getPassword();
 
-        $this->mailClient->Subject = 'Here is the subject';
-        $this->mailClient->Body = 'This is the HTML message body <b>in bold!</b>';
+    }
+
+    private function renderMail(WorkingDay $day)
+    {
+        $this->mailClient->Subject = "Tasks for " . $day->getDate();
+
+        $tasks = $day->getTasks();
+
+        foreach ($tasks as $task) {
+            $this->mailClient->Body .= $task . "\n";
+        }
     }
 }

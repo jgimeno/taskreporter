@@ -82,4 +82,17 @@ class Task
     {
         $this->workingDay = $workingDay;
     }
+
+    public function __toString()
+    {
+        $return = "";
+
+        if ($this->getTicket()) {
+            $return .= "(". $this->getTicket() .") ";
+        }
+
+        return $return . $this->getDescription();
+    }
+
+
 }

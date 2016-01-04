@@ -23,7 +23,16 @@ class MailServiceProvider extends AbstractServiceProvider
      */
     public function register()
     {
-        $mailOptions = new MailOptions("", "", new Password(""));
+        $configProvider = $this
+            ->getContainer()
+            ->get('JGimeno\TaskReporter\Domain\Service\ConfigurationProviderInterface');
+
+        $mailOptions = new MailOptions(
+            $configProvider->getConfiguration('mail.host'),
+            $configProvider->getConfiguration('mail.username'),
+            new Password($configProvider->getConfiguration('mail.password')),
+            $configProvider->getConfiguration('mail.from')
+        );
 
         $mailProvider = new PhpMailerMailProvider(new PHPMailer(), $mailOptions);
 
