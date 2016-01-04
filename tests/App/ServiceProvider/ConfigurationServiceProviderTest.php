@@ -40,11 +40,9 @@ class ConfigurationServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function expectedServicesProvider()
     {
-        return array(
-            array('JGimeno\TaskReporter\Domain\Service\ConfigurationProviderInterface', true),
-            array('JGimeno\TaskReporter\Domain\Service\YamlParserInterface', false),
-        );
+        return [
+            ['JGimeno\TaskReporter\Domain\Service\ConfigurationProviderInterface', true],
+            ['JGimeno\TaskReporter\Domain\Service\YamlParserInterface', false],
+        ];
     }
-
-
 }

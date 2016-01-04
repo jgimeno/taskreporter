@@ -4,6 +4,7 @@ namespace JGimeno\TaskReporter\App\ServiceProvider;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
+use JGimeno\TaskReporter\Infrastructure\Persistence\DoctrineWorkingDayRepository;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
 class RepositoryServiceProvider extends AbstractServiceProvider
@@ -47,7 +48,7 @@ class RepositoryServiceProvider extends AbstractServiceProvider
         $this->getContainer()
             ->add(
                 'JGimeno\TaskReporter\Entity\WorkingDayRepositoryInterface',
-                'JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository'
+                DoctrineWorkingDayRepository::class
             )
             ->withArgument($this->entityManager);
     }

@@ -6,7 +6,7 @@ use JGimeno\TaskReporter\App\Command\AddTaskHandler;
 use JGimeno\TaskReporter\App\Command\ListTasksHandler;
 use JGimeno\TaskReporter\App\Console\CreateTask;
 use JGimeno\TaskReporter\App\Console\ListTasks;
-use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
+use JGimeno\TaskReporter\Infrastructure\Persistence\DoctrineWorkingDayRepository;
 use League\Container\Container;
 
 class ConsoleServiceProviderTest extends \PHPUnit_Framework_TestCase

@@ -4,7 +4,7 @@ namespace JGimeno\TaskReporter\Tests\ServiceProvider;
 
 use JGimeno\TaskReporter\App\Command\AddTaskHandler;
 use JGimeno\TaskReporter\App\Command\ListTasksHandler;
-use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
+use JGimeno\TaskReporter\Infrastructure\Persistence\DoctrineWorkingDayRepository;
 use League\Container\Container;
 
 class CommandServiceProviderTest extends \PHPUnit_Framework_TestCase

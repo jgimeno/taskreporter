@@ -1,6 +1,6 @@
 <?php
 
-namespace JGimeno\TaskReporter\Infrastructure;
+namespace JGimeno\TaskReporter\Infrastructure\Persistence;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
@@ -8,7 +8,7 @@ use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDayRepositoryInterface;
 use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 
-class DoctrineWorkingDayRepository implements  WorkingDayRepositoryInterface
+class DoctrineWorkingDayRepository implements WorkingDayRepositoryInterface
 {
     /**
      * @var EntityManager

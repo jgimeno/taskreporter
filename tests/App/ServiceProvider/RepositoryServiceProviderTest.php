@@ -3,6 +3,7 @@
 namespace JGimeno\TaskReporter\Tests\ServiceProvider;
 
 
+use JGimeno\TaskReporter\Infrastructure\Persistence\DoctrineWorkingDayRepository;
 use League\Container\Container;
 
 class RepositoryServiceProviderTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +29,7 @@ class RepositoryServiceProviderTest extends \PHPUnit_Framework_TestCase
     {
 
         $this->assertInstanceOf(
-            'JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository',
+            DoctrineWorkingDayRepository::class,
             $this->container->get('JGimeno\TaskReporter\Entity\WorkingDayRepositoryInterface')
         );
 

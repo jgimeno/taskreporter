@@ -5,7 +5,7 @@ namespace JGimeno\TaskReporter\Tests\Infrastructure;
 use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\Task;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
-use JGimeno\TaskReporter\Infrastructure\DoctrineWorkingDayRepository;
+use JGimeno\TaskReporter\Infrastructure\Persistence\DoctrineWorkingDayRepository;
 
 class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
 {
