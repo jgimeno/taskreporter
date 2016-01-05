@@ -21,7 +21,7 @@ class PhpMailerMailProviderTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->willReturn(true);
 
-        $mailOptions = new MailOptions('hola', 'este', new Password('es'), "");
+        $mailOptions = new MailOptions('hola', 'este', new Password('es'), "", "");
 
         $phpmailer = new PhpMailerMailProvider($mockPHPMailer, $mailOptions);
         $phpmailer->sendReportOf(new WorkingDay(WorkingDayId::generate()));
@@ -40,9 +40,28 @@ class PhpMailerMailProviderTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->willThrowException(new Exception());
 
-        $mailOptions = new MailOptions('hola', 'este', new Password('es'), "");
+        $mailOptions = new MailOptions('hola', 'este', new Password('es'), "", "");
 
         $phpmailer = new PhpMailerMailProvider($mockPHPMailer, $mailOptions);
         $phpmailer->sendReportOf(new WorkingDay(WorkingDayId::generate()));
+    }
+
+    public function testItAddsEveryToEmailsItFindsToSend()
+    {
+        $expectedCCs = ["mail1@gmail.com", "mail2@gmail.com"];
+
+        $mailOptions = new MailOptions('hola', 'este', new Password('es'), "", $expectedCCs);
+
+        $mockPHPMailer = $this->getMockBuilder(PHPMailer::class)
+            ->getMock();
+
+        $mockPHPMailer->expects($this->exactly(2))
+            ->method('addCC')
+            ->withConsecutive(
+                ["mail1@gmail.com"],
+                ["mail2@gmail.com"]
+            );
+
+        $phpmailer = new PhpMailerMailProvider($mockPHPMailer, $mailOptions);
     }
 }

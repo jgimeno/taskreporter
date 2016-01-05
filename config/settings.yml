@@ -1,7 +1,8 @@
 mail:
   host: smtp.gmail.com
-  username: user
+  username: username
   password: password
-  from: email@gmail.com
+  from: from@gmail.com
   to:
-    - email@gmail.com
+    - email1@gmail.com
+    - email2@gmail.com

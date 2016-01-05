@@ -81,5 +81,4 @@ class YamlConfigurationProvider implements ConfigurationProviderInterface
             throw new Exception('Maximum nesting in config file is '.self::MAX_NESTING);
         }
     }
-
 }

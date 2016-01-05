@@ -53,20 +53,16 @@ class PhpMailerMailProvider implements MailProviderInterface
     {
         $this->mailClient->isSMTP();
         $this->mailClient->SMTPAuth = true;
-
-        $this->mailClient->SMTPDebug = 2;
+        $this->mailClient->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $this->mailClient->addAddress('jgimeno@gmail.com', 'Joe User');
 
         $this->mailClient->Host = $this->options->getHost();
-
-        $this->mailClient->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $this->mailClient->Username = $this->options->getUserName();
+        $this->mailClient->Password = $this->options->getPassword();
+        $this->mailClient->setFrom($this->options->getFrom());
         $this->mailClient->Port = $this->options->getPort();
 
-        $this->mailClient->setFrom($this->options->getFrom(), 'Mailer');
-        $this->mailClient->addAddress('jgimeno@gmail.com', 'Joe User');     // Add a recipient
-
-        $this->mailClient->Username = $this->options->getUserName();                 // SMTP username
-        $this->mailClient->Password = $this->options->getPassword();
-
+        $this->addCCs();
     }
 
     private function renderMail(WorkingDay $day)
@@ -77,6 +73,17 @@ class PhpMailerMailProvider implements MailProviderInterface
 
         foreach ($tasks as $task) {
             $this->mailClient->Body .= $task . "\n";
+        }
+    }
+
+    private function addCCs()
+    {
+        $emailsToAdd = $this->options->getTo();
+
+        if (!empty($emailsToAdd)) {
+            foreach ($this->options->getTo() as $to) {
+                $this->mailClient->addCC($to);
+            }
         }
     }
 }

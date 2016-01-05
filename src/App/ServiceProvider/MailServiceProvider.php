@@ -31,7 +31,8 @@ class MailServiceProvider extends AbstractServiceProvider
             $configProvider->getConfiguration('mail.host'),
             $configProvider->getConfiguration('mail.username'),
             new Password($configProvider->getConfiguration('mail.password')),
-            $configProvider->getConfiguration('mail.from')
+            $configProvider->getConfiguration('mail.from'),
+            $configProvider->getConfiguration('mail.to')
         );
 
         $mailProvider = new PhpMailerMailProvider(new PHPMailer(), $mailOptions);

@@ -31,6 +31,8 @@ class SendReport extends ContainerAwareCommand
 
             $commandHandler->handle(new SendReportCommand());
 
+            $output->writeln("Your report has been sent.");
+
         } catch (InfrastructureException $ex) {
             $output->writeln('<error>' . $ex->getMessage() . '</error>');
         }

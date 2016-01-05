@@ -27,6 +27,8 @@ Once you clone the repo execute doctrine command to create sqlite internal datab
 vendor/bin/doctrine orm:schema-tool:update --force
 ```
 
+Next configure your own email settings on file *config/settings.yml*.
+
 Then you can start playing with the commands:
 
 #### Add a new task
@@ -51,6 +53,12 @@ You can list inserted tasks with:
 php console.php taskReporter:list
 ```
 
+Finally to send the report:
+```
+php console.php taskReporter:send
+```
+
 ###TODO
 
-Still we cannot send the report by mail :D
+Better email error handling.
+There must be a way to define our own template to send in the emails.

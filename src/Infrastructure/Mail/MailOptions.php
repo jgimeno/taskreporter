@@ -17,26 +17,40 @@ class MailOptions
      * @var int
      */
     private $port;
+
     /**
      * @var string
      */
     private $from;
 
+    private $to;
+
     /**
      * MailOptions constructor.
+     *
      * @param $host
      * @param $userName
      * @param Password $password
-     * @param string $from The address that appears
+     * @param string $from From address
+     * @param array $to Addresses to send the email to.
      * @param PortNumber $port
      */
-    public function __construct($host, $userName, Password $password, $from, PortNumber $port = null)
+    public function __construct($host, $userName, Password $password, $from, $to, PortNumber $port = null)
     {
         $this->host = $host;
         $this->userName = $userName;
         $this->password = $password;
         $this->port = $port;
         $this->from = $from;
+        $this->to = $to;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTo()
+    {
+        return $this->to;
     }
 
     /**
