@@ -5,6 +5,7 @@ namespace JGimeno\TaskReporter\App\ServiceProvider;
 use JGimeno\TaskReporter\Domain\Value\Password;
 use JGimeno\TaskReporter\Infrastructure\Mail\MailOptions;
 use JGimeno\TaskReporter\Infrastructure\Mail\PhpMailerMailProvider;
+use JGimeno\TaskReporter\Presentation\Mail\HardCodedTemplate;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -35,7 +36,7 @@ class MailServiceProvider extends AbstractServiceProvider
             $configProvider->getConfiguration('mail.to')
         );
 
-        $mailProvider = new PhpMailerMailProvider(new PHPMailer(), $mailOptions);
+        $mailProvider = new PhpMailerMailProvider(new PHPMailer(), $mailOptions, new HardCodedTemplate());
 
         $this->getContainer()->add('JGimeno\TaskReporter\Domain\Service\MailProviderInterface', $mailProvider);
     }

@@ -5,6 +5,7 @@ namespace JGimeno\TaskReporter\Infrastructure\Mail;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Domain\Service\MailProviderInterface;
 use JGimeno\TaskReporter\Infrastructure\Exception\MailProviderException;
+use JGimeno\TaskReporter\Presentation\Mail\MailTemplateInterface;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -18,16 +19,22 @@ class PhpMailerMailProvider implements MailProviderInterface
      * @var MailOptions
      */
     private $options;
+    /**
+     * @var MailTemplateInterface
+     */
+    private $template;
 
     /**
      * PhpMailerMailProvider constructor.
      * @param PHPMailer $mailClient
      * @param MailOptions $options
+     * @param MailTemplateInterface $template
      */
-    public function __construct(PHPMailer $mailClient, MailOptions $options)
+    public function __construct(PHPMailer $mailClient, MailOptions $options, MailTemplateInterface $template)
     {
         $this->mailClient = $mailClient;
         $this->options = $options;
+        $this->template = $template;
 
         $this->setOptions();
     }
@@ -67,13 +74,8 @@ class PhpMailerMailProvider implements MailProviderInterface
 
     private function renderMail(WorkingDay $day)
     {
-        $this->mailClient->Subject = "Tasks for " . $day->getDate();
-
-        $tasks = $day->getTasks();
-
-        foreach ($tasks as $task) {
-            $this->mailClient->Body .= $task . "\n";
-        }
+        $this->mailClient->Subject = $this->template->renderSubject($day);
+        $this->mailClient->Body = $this->template->renderBody($day);
     }
 
     private function addCCs()

@@ -12,6 +12,17 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class PhpMailerMailProviderTest extends \PHPUnit_Framework_TestCase
 {
+    protected $mockTemplate;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->mockTemplate = $this->getMockBuilder('JGimeno\TaskReporter\Presentation\Mail\MailTemplateInterface')
+            ->getMock();
+    }
+
+
     public function testItEchoesMailSendWhenItIsCorrect()
     {
         $mockPHPMailer = $this->getMockBuilder(PHPMailer::class)
@@ -21,9 +32,15 @@ class PhpMailerMailProviderTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->willReturn(true);
 
+        $this->mockTemplate->expects($this->once())
+            ->method('renderSubject');
+
+        $this->mockTemplate->expects($this->once())
+            ->method('renderBody');
+
         $mailOptions = new MailOptions('hola', 'este', new Password('es'), "", "");
 
-        $phpmailer = new PhpMailerMailProvider($mockPHPMailer, $mailOptions);
+        $phpmailer = new PhpMailerMailProvider($mockPHPMailer, $mailOptions, $this->mockTemplate);
         $phpmailer->sendReportOf(new WorkingDay(WorkingDayId::generate()));
     }
 
@@ -40,9 +57,15 @@ class PhpMailerMailProviderTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->willThrowException(new Exception());
 
+        $this->mockTemplate->expects($this->once())
+            ->method('renderSubject');
+
+        $this->mockTemplate->expects($this->once())
+            ->method('renderBody');
+
         $mailOptions = new MailOptions('hola', 'este', new Password('es'), "", "");
 
-        $phpmailer = new PhpMailerMailProvider($mockPHPMailer, $mailOptions);
+        $phpmailer = new PhpMailerMailProvider($mockPHPMailer, $mailOptions, $this->mockTemplate);
         $phpmailer->sendReportOf(new WorkingDay(WorkingDayId::generate()));
     }
 
@@ -62,6 +85,6 @@ class PhpMailerMailProviderTest extends \PHPUnit_Framework_TestCase
                 ["mail2@gmail.com"]
             );
 
-        $phpmailer = new PhpMailerMailProvider($mockPHPMailer, $mailOptions);
+        new PhpMailerMailProvider($mockPHPMailer, $mailOptions, $this->mockTemplate);
     }
 }
