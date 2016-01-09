@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f6cc78f294441610f8207358df2e638",
-    "content-hash": "62fccf68cb245b8001144c3e72c76cbc",
+    "hash": "64c4ba4f78549d1924cfb098cfa1bb65",
+    "content-hash": "c3f344d7b7447ef8863642530072fb5c",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -631,6 +631,49 @@
                 "orm"
             ],
             "time": "2016-01-05 21:36:06"
+        },
+        {
+            "name": "dust-php/dust-php",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cretz/dust-php.git",
+                "reference": "09380864ea8d96afdf5ad1d8ea778d09db1869af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cretz/dust-php/zipball/09380864ea8d96afdf5ad1d8ea778d09db1869af",
+                "reference": "09380864ea8d96afdf5ad1d8ea778d09db1869af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Dust": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chad Retz"
+                }
+            ],
+            "description": "A templating engine for PHP based on Dust JS",
+            "homepage": "http://cretz.github.com/dust-php",
+            "keywords": [
+                "dust",
+                "templating"
+            ],
+            "time": "2013-02-16 18:40:40"
         },
         {
             "name": "league/container",

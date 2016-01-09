@@ -19,7 +19,7 @@ no framework at all it's because I still did not decide if I will need one!
 Don't you think is a good idea to start developing since the beginning and
  not being coupled to any framework? :D
 
-### Usage
+### Configure
 
 Once you clone the repo execute doctrine command to create sqlite internal database:
 
@@ -27,9 +27,17 @@ Once you clone the repo execute doctrine command to create sqlite internal datab
 vendor/bin/doctrine orm:schema-tool:update --force
 ```
 
-Next configure your own email settings on file *config/settings.yml*.
+#### Configure mail settings
 
-Then you can start playing with the commands:
+You can define your email settings on file *config/settings.yml*.
+
+#### Configure mail template
+
+In the folder *config/template/mail.dust* you will see a basic template that you can tweak using the Dust template engine (http://cretz.github.io/dust-php/).
+
+You can use another engine for templates just creating another object that implements the *MailTemplateInterface*.
+
+### Usage
 
 #### Add a new task
 
@@ -61,4 +69,3 @@ php console.php taskReporter:send
 ###TODO
 
 Better email error handling.
-There must be a way to define our own template to send in the emails.

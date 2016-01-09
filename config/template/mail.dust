@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <h1>Today I did</h1>
+
+        <ul>
+            {#tasks}
+              <li>{task}</li>{~n}
+            {/tasks}
+        </ul>
+    </body>
+</html>
+

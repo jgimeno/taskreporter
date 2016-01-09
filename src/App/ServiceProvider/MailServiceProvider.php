@@ -2,10 +2,11 @@
 
 namespace JGimeno\TaskReporter\App\ServiceProvider;
 
+use Dust\Dust;
 use JGimeno\TaskReporter\Domain\Value\Password;
 use JGimeno\TaskReporter\Infrastructure\Mail\MailOptions;
 use JGimeno\TaskReporter\Infrastructure\Mail\PhpMailerMailProvider;
-use JGimeno\TaskReporter\Presentation\Mail\HardCodedTemplate;
+use JGimeno\TaskReporter\Presentation\Mail\DustMailTemplate;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -36,7 +37,16 @@ class MailServiceProvider extends AbstractServiceProvider
             $configProvider->getConfiguration('mail.to')
         );
 
-        $mailProvider = new PhpMailerMailProvider(new PHPMailer(), $mailOptions, new HardCodedTemplate());
+        $templateFile = __DIR__ . "/../../../config/template/mail.dust";
+
+        $mailProvider = new PhpMailerMailProvider(
+            new PHPMailer(),
+            $mailOptions,
+            new DustMailTemplate(
+                new Dust(),
+                $templateFile
+            )
+        );
 
         $this->getContainer()->add('JGimeno\TaskReporter\Domain\Service\MailProviderInterface', $mailProvider);
     }

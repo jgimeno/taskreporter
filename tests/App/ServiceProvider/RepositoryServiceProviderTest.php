@@ -2,7 +2,6 @@
 
 namespace JGimeno\TaskReporter\Tests\ServiceProvider;
 
-
 use JGimeno\TaskReporter\Infrastructure\Persistence\DoctrineWorkingDayRepository;
 use League\Container\Container;
 

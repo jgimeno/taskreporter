@@ -76,6 +76,7 @@ class PhpMailerMailProvider implements MailProviderInterface
     {
         $this->mailClient->Subject = $this->template->renderSubject($day);
         $this->mailClient->Body = $this->template->renderBody($day);
+        $this->mailClient->IsHTML(true);
     }
 
     private function addCCs()
