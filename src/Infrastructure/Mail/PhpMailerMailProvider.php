@@ -61,7 +61,7 @@ class PhpMailerMailProvider implements MailProviderInterface
         $this->mailClient->isSMTP();
         $this->mailClient->SMTPAuth = true;
         $this->mailClient->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-        $this->mailClient->addAddress('jgimeno@gmail.com', 'Joe User');
+        $this->mailClient->addAddress($this->options->getFrom());
 
         $this->mailClient->Host = $this->options->getHost();
         $this->mailClient->Username = $this->options->getUserName();

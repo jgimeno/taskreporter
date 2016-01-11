@@ -37,7 +37,7 @@ class DustMailTemplate implements MailTemplateInterface
      */
     public function renderSubject(WorkingDay $day)
     {
-        // TODO: Implement renderSubject() method.
+        return 'Tasks on ' . $day->getDate();
     }
 
     /**
