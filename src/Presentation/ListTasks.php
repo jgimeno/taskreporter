@@ -34,7 +34,7 @@ class ListTasks
     {
         /* @var $task Task */
         foreach ($tasks as $task) {
-            $line = "";
+            $line = "* ";
 
             if ($task->getTicket()) {
                 $line = "(" . $task->getTicket() . ") ";

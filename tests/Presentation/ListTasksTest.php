@@ -26,7 +26,7 @@ class ListTasksTest extends \PHPUnit_Framework_TestCase
 
         $this->mockupOutput->expects($this->once())
             ->method('writeLn')
-            ->with($taskText);
+            ->with('* ' . $taskText);
 
         $listTasksPresentation = new ListTasks($this->mockupOutput);
         $listTasksPresentation->render($tasksCollection);
