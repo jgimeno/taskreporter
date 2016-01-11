@@ -19,14 +19,22 @@ class DustMailTemplate implements MailTemplateInterface
     private $templateFile;
 
     /**
+     * @var
+     */
+    private $templateSubject;
+
+    /**
      * DustMailTemplate constructor.
      *
      * @param Dust $templateEngine The engine used to render the template.
+     * @param $templateFile
+     * @param $templateSubject
      */
-    public function __construct(Dust $templateEngine, $templateFile)
+    public function __construct(Dust $templateEngine, $templateFile, $templateSubject)
     {
         $this->templateEngine = $templateEngine;
         $this->templateFile = $templateFile;
+        $this->templateSubject = $templateSubject;
     }
 
     /**
@@ -37,7 +45,9 @@ class DustMailTemplate implements MailTemplateInterface
      */
     public function renderSubject(WorkingDay $day)
     {
-        return 'Tasks on ' . $day->getDate();
+        $format = str_replace('#date#', '%s', $this->templateSubject);
+
+        return sprintf($format, $day->getDate());
     }
 
     /**
@@ -52,9 +62,12 @@ class DustMailTemplate implements MailTemplateInterface
 
         $tasks = $this->formatTasks($day);
 
-        $output = $this->templateEngine->renderTemplate($template, [
-            'tasks' => $tasks
-        ]);
+        $output = $this->templateEngine->renderTemplate(
+            $template,
+            [
+                'tasks' => $tasks,
+            ]
+        );
 
         return $output;
     }

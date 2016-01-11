@@ -44,7 +44,8 @@ class MailServiceProvider extends AbstractServiceProvider
             $mailOptions,
             new DustMailTemplate(
                 new Dust(),
-                $templateFile
+                $templateFile,
+                $configProvider->getConfiguration('mail.subject')
             )
         );
 
