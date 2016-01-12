@@ -21,7 +21,11 @@ class DustMailTemplateTest extends \PHPUnit_Framework_TestCase
         $workingDay->addTask($taskWithTicket);
         $workingDay->addTask($taskWithoutTicket);
 
-        $templateRender = new DustMailTemplate(new Dust(), __DIR__ .  "/files/testtemplate.dust");
+        $templateRender = new DustMailTemplate(
+            new Dust(),
+            __DIR__."/files/testtemplate.dust",
+            'Daily Report #date# for Manolo'
+        );
 
         $template = $templateRender->renderBody($workingDay);
 
@@ -35,6 +39,9 @@ class DustMailTemplateTest extends \PHPUnit_Framework_TestCase
   <li>Task without ticket.</li>
 TEXT;
 
+        $expectedSubject = 'Daily Report '.date('Y-m-d').' for Manolo';
+
+        $this->assertEquals($expectedSubject, $templateRender->renderSubject($workingDay));
 
         $this->assertEquals($expectedTemplate, $template);
     }
