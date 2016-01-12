@@ -38,6 +38,26 @@ class WorkingDayTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $tasks);
     }
 
+    public function testWorkingDayReturnsExpectedValueWhenDeletingATask()
+    {
+        $task = new Task("Task day.");
+        $task2 = new Task("Task 2 day.");
+
+        $this->workingDay->addTask($task);
+        $this->workingDay->addTask($task2);
+
+        $this->assertTrue($this->workingDay->deleteTask($task2));
+        $this->assertCount(1, $this->workingDay->getTasks());
+    }
+
+    public function getTaskByDescriptionReturnCorrectTask()
+    {
+        $task = new Task("Task day.");
+        $this->workingDay->addTask($task);
+        $retrievedTask = $this->workingDay->getTaskByDescription("Task day.");
+        $this->assertSame($task, $retrievedTask);
+    }
+
     protected function setUp()
     {
         parent::setUp();

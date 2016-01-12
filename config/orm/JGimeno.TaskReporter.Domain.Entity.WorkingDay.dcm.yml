@@ -11,6 +11,7 @@ JGimeno\TaskReporter\Domain\Entity\WorkingDay:
       nullable: false
   oneToMany:
     tasks:
+      orphanRemoval: true
       targetEntity: JGimeno\TaskReporter\Domain\Entity\Task
       mappedBy: workingDay
       cascade: ["persist", "merge", "remove"]

@@ -37,6 +37,26 @@ class WorkingDay
         $this->tasks->add($task);
     }
 
+    /**
+     * @param Task $task
+     * @return bool
+     */
+    public function deleteTask(Task $task)
+    {
+        $task->setWorkingDay($this);
+
+        return $this->tasks->removeElement($task);
+    }
+
+    public function getTaskByDescription(string $value)
+    {
+        return $this->tasks->filter(
+            function (Task $task) use ($value) {
+                return $value === $task->getDescription();
+            }
+        )->first();
+    }
+
     public function getTasks()
     {
         return $this->tasks;
