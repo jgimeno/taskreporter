@@ -21,5 +21,8 @@ class ValueObject
         return (string)$this->value;
     }
 
-
+    public function equals(ValueObject $value)
+    {
+        return $this->value == $value->value;
+    }
 }

@@ -3,6 +3,7 @@
 namespace JGimeno\TaskReporter\Domain\Entity;
 
 use JGimeno\TaskReporter\Domain\Exception\TaskEmptyException;
+use JGimeno\TaskReporter\Domain\Value\TaskDescription;
 
 class Task
 {
@@ -62,7 +63,7 @@ class Task
 
         $endDelimiterPosition++; // Offset of 1 to not include delimiter
 
-        $this->description = trim(substr($description, $endDelimiterPosition));
+        $this->description = new TaskDescription(trim(substr($description, $endDelimiterPosition)));
     }
 
     public function getDescription()

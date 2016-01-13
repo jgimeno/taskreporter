@@ -42,11 +42,11 @@ class DeleteTask extends Command
     {
         $tasks = $this->listsTasksHandler->handle();
 
-        $task = $this->showTasksToDelete($input, $output, $tasks);
+        $taskDescription = $this->showTasksToDelete($input, $output, $tasks);
 
-        $this->commandHandler->handle(new DeleteTaskCommand($task));
+        $this->commandHandler->handle(new DeleteTaskCommand($taskDescription));
 
-        $output->writeln('You have just deleted: '.$task);
+        $output->writeln('You have just deleted: '.$taskDescription);
     }
 
     protected function showTasksToDelete(InputInterface $input, OutputInterface $output, $tasks)
@@ -54,7 +54,8 @@ class DeleteTask extends Command
         $helper = $this->getHelper('question');
 
         $question = new ChoiceQuestion(
-            'Please select the task that you want to delete', $tasks->toArray(),
+            'Please select the task that you want to delete',
+            $tasks->toArray(),
             0
         );
 

@@ -59,4 +59,14 @@ class ValueObjectTest extends \PHPUnit_Framework_TestCase
         $value = new ValueObject('hola');
         $this->assertEquals("hola", $value);
     }
+
+    public function testTwoValuesAreEqualWhenValueIsTheSame()
+    {
+        $value1 = new ValueObject("Hola");
+        $value2 = new ValueObject("Hola");
+        $valueNotEqual = new ValueObject("Adios");
+
+        $this->assertTrue($value1->equals($value2));
+        $this->assertFalse($value1->equals($valueNotEqual));
+    }
 }

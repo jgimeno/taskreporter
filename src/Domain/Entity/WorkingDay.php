@@ -5,6 +5,7 @@ namespace JGimeno\TaskReporter\Domain\Entity;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use JGimeno\TaskReporter\Domain\Exception\DomainException;
+use JGimeno\TaskReporter\Domain\Value\TaskDescription;
 use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 
 class WorkingDay
@@ -47,24 +48,20 @@ class WorkingDay
     }
 
     /**
-     * @param string $description
+     * @param TaskDescription $description
      * @return mixed
      * @throws DomainException
      */
-    public function getTaskByDescription($description)
+    public function getTaskByDescription(TaskDescription $description)
     {
         $tasksFound = $this->tasks->filter(
             function (Task $task) use ($description) {
-                return $description === $task->getDescription();
+                return $description->equals($task->getDescription());
             }
         );
 
         if ($tasksFound->isEmpty()) {
             throw new DomainException('Task '.$description.' does not exist in working day');
-        }
-
-        if ($tasksFound->count() > 1) {
-            throw new DomainException('There is more than one task with description: '.$description);
         }
 
         return $tasksFound->first();

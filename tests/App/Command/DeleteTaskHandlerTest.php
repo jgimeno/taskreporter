@@ -34,7 +34,6 @@ class DeleteTaskHandlerTest extends \PHPUnit_Framework_TestCase
         $workingDay->addTask(new Task("Task test"));
         $this->workingDayRepo->add($workingDay);
 
-
         $this->commandHandler->handle(new DeleteTask("Task test"));
 
         $this->assertCount(0, $workingDay->getTasks());

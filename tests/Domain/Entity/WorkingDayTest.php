@@ -5,6 +5,7 @@ namespace JGimeno\TaskReporter\Tests\Domain\Entity;
 use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Domain\Entity\Task;
+use JGimeno\TaskReporter\Domain\Value\TaskDescription;
 use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 
 class WorkingDayTest extends \PHPUnit_Framework_TestCase
@@ -46,32 +47,19 @@ class WorkingDayTest extends \PHPUnit_Framework_TestCase
         $this->workingDay->addTask($task);
         $this->workingDay->addTask($task2);
 
-        $this->workingDay->deleteTaskWithDescription('Task 2 day.');
+        $this->workingDay->deleteTaskWithDescription(new TaskDescription('Task 2 day.'));
         $this->assertCount(1, $this->workingDay->getTasks());
     }
 
-    public function getTaskByDescriptionReturnCorrectTask()
+    public function testGetTaskByDescriptionReturnCorrectTask()
     {
         $task = new Task("Task day.");
         $this->workingDay->addTask($task);
-        $retrievedTask = $this->workingDay->getTaskByDescription("Task day.");
+        $retrievedTask = $this->workingDay->getTaskByDescription(new TaskDescription("Task day."));
         $this->assertSame($task, $retrievedTask);
     }
 
-    public function getTaskByDescriptionThrowsExceptionWhenFoundTaskIsNotUnique()
-    {
-        $task = new Task("Task day.");
-        $task2 = new Task("Task day.");
-
-        $this->workingDay->addTask($task);
-        $this->workingDay->addTask($task2);
-
-        $this->setExpectedException('JGimeno\TaskReporter\Domain\Exception\DomainException');
-
-        $this->workingDay->getTaskByDescription("Task day.");
-    }
-
-    public function getTaskByDescriptionThrowsExceptionWhenTaskNotFound()
+    public function testGetTaskByDescriptionThrowsExceptionWhenTaskNotFound()
     {
         $task = new Task("Task day.");
 
@@ -79,7 +67,7 @@ class WorkingDayTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('JGimeno\TaskReporter\Domain\Exception\DomainException');
 
-        $this->workingDay->getTaskByDescription("No task.");
+        $this->workingDay->getTaskByDescription(new TaskDescription("No task."));
     }
 
     protected function setUp()
