@@ -93,6 +93,4 @@ class Task
 
         return $return . $this->getDescription();
     }
-
-
 }

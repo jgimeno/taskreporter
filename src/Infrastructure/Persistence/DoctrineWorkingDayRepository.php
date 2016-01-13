@@ -31,7 +31,7 @@ class DoctrineWorkingDayRepository implements WorkingDayRepositoryInterface
 
     public function add(WorkingDay $workingDay)
     {
-        $this->em->persist($workingDay);
+        //$this->em->persist($workingDay);
         $this->em->flush();
     }
 

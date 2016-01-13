@@ -13,7 +13,8 @@ class ConsoleServiceProvider extends AbstractServiceProvider
      */
     protected $provides = [
         'JGimeno\TaskReporter\App\Console\CreateTask',
-        'JGimeno\TaskReporter\App\Console\ListTasks'
+        'JGimeno\TaskReporter\App\Console\ListTasks',
+        'JGimeno\TaskReporter\App\Console\DeleteTask'
     ];
 
 
@@ -31,5 +32,9 @@ class ConsoleServiceProvider extends AbstractServiceProvider
 
         $this->getContainer()->add('JGimeno\TaskReporter\App\Console\ListTasks')
             ->withArgument('JGimeno\TaskReporter\App\Command\ListTasksHandler');
+
+        $this->getContainer()->add('JGimeno\TaskReporter\App\Console\DeleteTask')
+            ->withArgument('JGimeno\TaskReporter\App\Command\ListTasksHandler')
+            ->withArgument('JGimeno\TaskReporter\App\Command\DeleteTaskHandler');
     }
 }

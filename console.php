@@ -15,4 +15,6 @@ $application->add($container->get('JGimeno\TaskReporter\App\Console\ListTasks'))
 
 $application->add(new SendReport());
 
+$application->add($container->get('JGimeno\TaskReporter\App\Console\DeleteTask'));
+
 $application->run();

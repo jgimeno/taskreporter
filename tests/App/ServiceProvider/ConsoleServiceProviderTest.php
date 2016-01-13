@@ -3,8 +3,10 @@
 namespace JGimeno\TaskReporter\Tests\ServiceProvider;
 
 use JGimeno\TaskReporter\App\Command\AddTaskHandler;
+use JGimeno\TaskReporter\App\Command\DeleteTaskHandler;
 use JGimeno\TaskReporter\App\Command\ListTasksHandler;
 use JGimeno\TaskReporter\App\Console\CreateTask;
+use JGimeno\TaskReporter\App\Console\DeleteTask;
 use JGimeno\TaskReporter\App\Console\ListTasks;
 use JGimeno\TaskReporter\Infrastructure\Persistence\DoctrineWorkingDayRepository;
 use League\Container\Container;
@@ -44,6 +46,20 @@ class ConsoleServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $addTasksConsole,
             $this->container->get('JGimeno\TaskReporter\App\Console\CreateTask')
+        );
+
+    }
+
+    public function testDeleteTaskConsoleIsCreatedWithTheCorrectCommandHandler()
+    {
+        $addTasksConsole = new DeleteTask(
+            new ListTasksHandler(new DoctrineWorkingDayRepository($this->container->get('entityManager'))),
+            new DeleteTaskHandler(new DoctrineWorkingDayRepository($this->container->get('entityManager')))
+        );
+
+        $this->assertEquals(
+            $addTasksConsole,
+            $this->container->get('JGimeno\TaskReporter\App\Console\DeleteTask')
         );
 
     }

@@ -38,6 +38,50 @@ class WorkingDayTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $tasks);
     }
 
+    public function testWorkingDayCanDeleteATaskWithDescription()
+    {
+        $task = new Task("Task day.");
+        $task2 = new Task("Task 2 day.");
+
+        $this->workingDay->addTask($task);
+        $this->workingDay->addTask($task2);
+
+        $this->workingDay->deleteTaskWithDescription('Task 2 day.');
+        $this->assertCount(1, $this->workingDay->getTasks());
+    }
+
+    public function getTaskByDescriptionReturnCorrectTask()
+    {
+        $task = new Task("Task day.");
+        $this->workingDay->addTask($task);
+        $retrievedTask = $this->workingDay->getTaskByDescription("Task day.");
+        $this->assertSame($task, $retrievedTask);
+    }
+
+    public function getTaskByDescriptionThrowsExceptionWhenFoundTaskIsNotUnique()
+    {
+        $task = new Task("Task day.");
+        $task2 = new Task("Task day.");
+
+        $this->workingDay->addTask($task);
+        $this->workingDay->addTask($task2);
+
+        $this->setExpectedException('JGimeno\TaskReporter\Domain\Exception\DomainException');
+
+        $this->workingDay->getTaskByDescription("Task day.");
+    }
+
+    public function getTaskByDescriptionThrowsExceptionWhenTaskNotFound()
+    {
+        $task = new Task("Task day.");
+
+        $this->workingDay->addTask($task);
+
+        $this->setExpectedException('JGimeno\TaskReporter\Domain\Exception\DomainException');
+
+        $this->workingDay->getTaskByDescription("No task.");
+    }
+
     protected function setUp()
     {
         parent::setUp();
