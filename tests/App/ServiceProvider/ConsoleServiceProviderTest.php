@@ -53,6 +53,7 @@ class ConsoleServiceProviderTest extends \PHPUnit_Framework_TestCase
     public function testDeleteTaskConsoleIsCreatedWithTheCorrectCommandHandler()
     {
         $addTasksConsole = new DeleteTask(
+            new ListTasksHandler(new DoctrineWorkingDayRepository($this->container->get('entityManager'))),
             new DeleteTaskHandler(new DoctrineWorkingDayRepository($this->container->get('entityManager')))
         );
 

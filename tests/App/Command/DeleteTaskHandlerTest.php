@@ -28,50 +28,18 @@ class DeleteTaskHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('JGimeno\TaskReporter\App\Command\DeleteTaskHandler', $handler);
     }
 
-    public function testICanGetTheWorkingDayFromCommand()
-    {
-        $workingDay = new WorkingDay(WorkingDayId::generate());
-        $workingDay->addTask(new Task("Task test"));
-        $this->workingDayRepo->add($workingDay);
-
-        $this->assertSame($workingDay, $this->commandHandler->handleShowList());
-    }
-
-    public function testICanGetTheWorkingDayFromCommandThrowsExceptionWhenNoTasks()
-    {
-        $workingDay = new WorkingDay(WorkingDayId::generate());
-        $this->workingDayRepo->add($workingDay);
-
-        $this->setExpectedException('JGimeno\TaskReporter\Domain\Exception\EmptyWorkingDayException');
-
-        $this->commandHandler->handleShowList();
-    }
-
     public function testICanDeleteTaskFromTheWorkingDayFromCommand()
     {
         $workingDay = new WorkingDay(WorkingDayId::generate());
         $workingDay->addTask(new Task("Task test"));
         $this->workingDayRepo->add($workingDay);
 
-        $this->commandHandler->handleShowList();
 
-        $this->commandHandler->handleDelete(new DeleteTask("Task test"));
+        $this->commandHandler->handle(new DeleteTask("Task test"));
 
         $this->assertCount(0, $workingDay->getTasks());
     }
 
-    public function testDeleteTaskFromCommandThrowsExceptionWhenTaskDoesNotExist()
-    {
-        $workingDay = new WorkingDay(WorkingDayId::generate());
-        $workingDay->addTask(new Task("Task test"));
-        $this->workingDayRepo->add($workingDay);
-
-        $this->commandHandler->handleShowList();
-
-        $this->setExpectedException('JGimeno\TaskReporter\Domain\Exception\DomainException');
-
-        $this->commandHandler->handleDelete(new DeleteTask("Task testa"));
-    }
 
     protected function setUp()
     {
