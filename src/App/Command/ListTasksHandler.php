@@ -30,7 +30,7 @@ class ListTasksHandler
     {
         $workingDay = $this->repo->getByDate(Carbon::now());
 
-        if (!$workingDay) {
+        if (!$workingDay || $workingDay->getTasks()->isEmpty()) {
             throw new EmptyWorkingDayException();
         }
 

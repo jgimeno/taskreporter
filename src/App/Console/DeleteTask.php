@@ -42,10 +42,6 @@ class DeleteTask extends Command
     {
         $tasks = $this->listsTasksHandler->handle();
 
-        if($tasks->isEmpty()) {
-            throw new EmptyWorkingDayException();
-        }
-
         $task = $this->showTasksToDelete($input, $output, $tasks);
 
         $this->commandHandler->handle(new DeleteTaskCommand($task));
