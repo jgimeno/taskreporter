@@ -40,7 +40,7 @@ class WorkingDay
     }
 
     /**
-     * @param string $description
+     * @param TaskDescription $description
      */
     public function deleteTaskWithDescription($description)
     {

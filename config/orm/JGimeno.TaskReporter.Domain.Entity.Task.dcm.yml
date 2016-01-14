@@ -8,7 +8,7 @@ JGimeno\TaskReporter\Domain\Entity\Task:
         strategy: AUTO
   fields:
     description:
-      type: string
+      type: task_description
       nullable: false
     ticket:
       type: string

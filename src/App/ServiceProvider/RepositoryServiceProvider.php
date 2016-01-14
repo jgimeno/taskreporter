@@ -43,6 +43,12 @@ class RepositoryServiceProvider extends AbstractServiceProvider
             $config
         );
 
+        \Doctrine\DBAL\Types\Type::addType('task_description',
+            \JGimeno\TaskReporter\Infrastructure\DoctrineTypes\TaskDescription::class);
+
+        $this->entityManager->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('description',
+            'task_description');
+
         $this->getContainer()->add('entityManager', $this->entityManager);
 
         $this->getContainer()
