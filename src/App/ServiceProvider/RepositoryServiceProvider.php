@@ -2,8 +2,10 @@
 
 namespace JGimeno\TaskReporter\App\ServiceProvider;
 
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
+use JGimeno\TaskReporter\Infrastructure\DoctrineTypes\TaskDescription;
 use JGimeno\TaskReporter\Infrastructure\Persistence\DoctrineWorkingDayRepository;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
@@ -43,11 +45,17 @@ class RepositoryServiceProvider extends AbstractServiceProvider
             $config
         );
 
-        \Doctrine\DBAL\Types\Type::addType('task_description',
-            \JGimeno\TaskReporter\Infrastructure\DoctrineTypes\TaskDescription::class);
 
-        $this->entityManager->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('description',
-            'task_description');
+        if (!Type::hasType("task_description")) {
+
+            Type::addType(
+                'task_description',
+                TaskDescription::class
+            );
+
+            $this->entityManager->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('description',
+                'task_description');
+        }
 
         $this->getContainer()->add('entityManager', $this->entityManager);
 
