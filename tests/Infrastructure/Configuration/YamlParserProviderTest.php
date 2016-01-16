@@ -4,6 +4,7 @@ namespace JGimeno\TaskReporter\Tests\Infrastructure\Configuration;
 
 use JGimeno\TaskReporter\Infrastructure\Configuration\YamlParserProvider;
 use org\bovigo\vfs\vfsStream;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 class YamlParserProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +34,6 @@ class YamlParserProviderTest extends \PHPUnit_Framework_TestCase
         $yamlParserProvider = new YamlParserProvider($this->mockParser);
 
         $this->assertInstanceOf('JGimeno\TaskReporter\Domain\Service\YamlParserInterface', $yamlParserProvider);
-
     }
 
     /**
@@ -42,8 +42,6 @@ class YamlParserProviderTest extends \PHPUnit_Framework_TestCase
     public function testParseIsReturningResultFromProvidedParser()
     {
         $yamlParserProvider = new YamlParserProvider($this->mockParser);
-
-        $this->assertInstanceOf('JGimeno\TaskReporter\Domain\Service\YamlParserInterface', $yamlParserProvider);
 
         vfsStream::newFile('config.yml', 0777)
             ->withContent('this should be a yaml string')
@@ -59,6 +57,24 @@ class YamlParserProviderTest extends \PHPUnit_Framework_TestCase
             $yamlParserProvider->parse(vfsStream::url('settings/config.yml'))
         );
 
+    }
+
+    public function testParseFailsWhenThereIsAProblemWithSymfonyYamlParser()
+    {
+        $yamlParserProvider = new YamlParserProvider($this->mockParser);
+
+        vfsStream::newFile('config.yml', 0777)
+            ->withContent('this should be a yaml string')
+            ->at($this->root);
+
+        $this->mockParser->expects($this->once())
+            ->method('parse')
+            ->with('this should be a yaml string')
+            ->willThrowException(new ParseException('Not a valid yaml', '-1'));
+
+        $this->setExpectedException('JGimeno\TaskReporter\Infrastructure\Exception\YamlProviderException');
+
+        $yamlParserProvider->parse(vfsStream::url('settings/config.yml'));
     }
 
 }
