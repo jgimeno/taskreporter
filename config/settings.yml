@@ -3,7 +3,7 @@ mail:
   username: username
   password: password
   from: from@gmail.com
-  subject: Daily Report %date%
+  subject: 'Daily Report #date#'
   to:
     - email1@gmail.com
     - email2@gmail.com
