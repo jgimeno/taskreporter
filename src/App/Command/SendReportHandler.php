@@ -31,7 +31,7 @@ class SendReportHandler
 
     public function handle(SendReport $command)
     {
-        $workingDay = $this->repo->getByDate(Carbon::today());
+        $workingDay = $this->repo->getByDate(Carbon::today('Europe/Madrid'));
 
         if (!$workingDay) {
             throw new EmptyWorkingDayException();

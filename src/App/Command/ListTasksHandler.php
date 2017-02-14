@@ -28,7 +28,7 @@ class ListTasksHandler
      */
     public function handle()
     {
-        $workingDay = $this->repo->getByDate(Carbon::now());
+        $workingDay = $this->repo->getByDate(Carbon::now('Europe/Madrid'));
 
         if (!$workingDay || $workingDay->getTasks()->isEmpty()) {
             throw new EmptyWorkingDayException();

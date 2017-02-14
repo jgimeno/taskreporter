@@ -33,7 +33,7 @@ class AddTaskHandlerTest extends \PHPUnit_Framework_TestCase
         $command = new AddTask("Task test");
         $this->commandHandler->handle($command);
 
-        $workingDayFromRepo = $this->workingDayRepo->getByDate(Carbon::now());
+        $workingDayFromRepo = $this->workingDayRepo->getByDate(Carbon::now('Europe/Madrid'));
 
         $expectedWorkingDay = new WorkingDay(WorkingDayId::generate());
         $expectedWorkingDay->addTask(new Task("Task test"));

@@ -26,7 +26,7 @@ class DeleteTaskHandler
     {
         $taskDescription = new TaskDescription($command->getDescription());
 
-        $workingDay = $this->repo->getByDate(Carbon::now());
+        $workingDay = $this->repo->getByDate(Carbon::now('Europe/Madrid'));
 
         $workingDay->deleteTaskWithDescription($taskDescription);
 

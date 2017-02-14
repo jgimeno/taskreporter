@@ -29,7 +29,7 @@ class InMemoryWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->inMemoryRepo->add($this->workingDayWithTask);
 
-        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now());
+        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now('Europe/Madrid'));
 
         $this->assertEquals($this->workingDayWithTask, $workingDayFromRepo);
     }
@@ -54,7 +54,7 @@ class InMemoryWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->inMemoryRepo->add($this->workingDayWithTask);
 
-        $nullWorkingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::tomorrow());
+        $nullWorkingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::tomorrow('Europe/Madrid'));
 
         $this->assertNull($nullWorkingDayFromRepo);
     }
@@ -68,12 +68,12 @@ class InMemoryWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->workingDayWithTask = $this->getWorkingDayWithTask();
         $this->inMemoryRepo->add($this->workingDayWithTask);
 
-        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now());
+        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now('Europe/Madrid'));
         $this->assertSame($this->workingDayWithTask, $workingDayFromRepo);
 
         $workingDayFromRepo->addTask(new Task('Beber un poco de vino'));
 
-        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now());
+        $workingDayFromRepo = $this->inMemoryRepo->getByDate(Carbon::now('Europe/Madrid'));
         $this->assertSame($this->workingDayWithTask, $workingDayFromRepo);
     }
 

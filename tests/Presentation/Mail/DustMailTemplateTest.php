@@ -13,6 +13,8 @@ class DustMailTemplateTest extends \PHPUnit_Framework_TestCase
 
     public function testItReturnsTheRenderedTemplateUsingFile()
     {
+        date_default_timezone_set('Europe/Madrid');
+
         $workingDay = new WorkingDay(WorkingDayId::generate());
 
         $taskWithTicket = new Task("#1234# Task with ticket.");

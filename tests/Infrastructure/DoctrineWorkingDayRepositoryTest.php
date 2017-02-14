@@ -40,7 +40,7 @@ class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->repo->add($this->workingDayWithTask);
 
-        $nullWorkingDay = $this->repo->getByDate(Carbon::tomorrow());
+        $nullWorkingDay = $this->repo->getByDate(Carbon::tomorrow('Europe/Madrid'));
         $this->assertNull($nullWorkingDay);
 
         $this->repo->remove($this->workingDayWithTask);
@@ -53,7 +53,7 @@ class DoctrineWorkingDayRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->repo->add($this->workingDayWithTask);
 
-        $workingDayFromRepo = $this->repo->getByDate(Carbon::now());
+        $workingDayFromRepo = $this->repo->getByDate(Carbon::now('Europe/Madrid'));
 
         $this->assertEquals($workingDayFromRepo->getDate(), $this->workingDayWithTask->getDate());
 
