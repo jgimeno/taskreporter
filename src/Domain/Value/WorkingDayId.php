@@ -2,25 +2,8 @@
 
 namespace JGimeno\TaskReporter\Domain\Value;
 
-use Ramsey\Uuid\Uuid;
+use ValueObjects\Base\Identifier;
 
-class WorkingDayId extends ValueObject
+class WorkingDayId extends Identifier
 {
-    /**
-     * WorkingDayId constructor.
-     */
-    public function __construct(Uuid $id)
-    {
-        parent::__construct($id);
-    }
-
-    public static function generate()
-    {
-        return new self(Uuid::uuid4());
-    }
-
-    public function __toString()
-    {
-        return $this->value->toString();
-    }
 }

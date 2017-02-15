@@ -3,6 +3,7 @@
 namespace JGimeno\TaskReporter\Domain\Value;
 
 use JGimeno\TaskReporter\Domain\Exception\ValueObjectException;
+use ValueObjects\ValueObject;
 
 class PortNumber extends ValueObject
 {
