@@ -18,7 +18,7 @@
     "league/container": "^2.0",
     "symfony/yaml": "^3.0",
     "dust-php/dust-php": "0.1.0",
-    "jgimeno/value-objects": "^0.1"
+    "jgimeno/value-objects": "^0.2"
   },
   "require-dev": {
     "phpunit/phpunit": "5.1.*",
