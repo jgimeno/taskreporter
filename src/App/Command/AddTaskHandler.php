@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
 use JGimeno\TaskReporter\Domain\Entity\WorkingDayRepositoryInterface;
 use JGimeno\TaskReporter\Domain\Entity\Task;
-use JGimeno\TaskReporter\Domain\Value\WorkingDayId;
 
 class AddTaskHandler
 {

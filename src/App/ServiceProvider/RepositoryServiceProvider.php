@@ -47,14 +47,18 @@ class RepositoryServiceProvider extends AbstractServiceProvider
 
 
         if (!Type::hasType("task_description")) {
-
             Type::addType(
                 'task_description',
                 TaskDescription::class
             );
 
-            $this->entityManager->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('description',
-                'task_description');
+            $this->entityManager
+                ->getConnection()
+                ->getDatabasePlatform()
+                ->registerDoctrineTypeMapping(
+                    'description',
+                    'task_description'
+                );
         }
 
         $this->getContainer()->add('entityManager', $this->entityManager);

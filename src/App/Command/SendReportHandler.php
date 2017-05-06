@@ -29,7 +29,7 @@ class SendReportHandler
         $this->repo = $repo;
     }
 
-    public function handle(SendReport $command)
+    public function handle()
     {
         $workingDay = $this->repo->getByDate(Carbon::today('Europe/Madrid'));
 

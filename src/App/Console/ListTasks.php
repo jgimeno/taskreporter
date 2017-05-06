@@ -2,7 +2,6 @@
 
 namespace JGimeno\TaskReporter\App\Console;
 
-use JGimeno\TaskReporter\App\Command\ListTasks as ListTasksCommand;
 use JGimeno\TaskReporter\App\Command\ListTasksHandler;
 use JGimeno\TaskReporter\Presentation\ListTasks as ListTasksPresentation;
 use Symfony\Component\Console\Command\Command;
@@ -32,7 +31,7 @@ class ListTasks extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $tasks = $this->commandHandler->handle(new ListTasksCommand());
+        $tasks = $this->commandHandler->handle();
 
         $listTasksPresentation = new ListTasksPresentation($output);
 

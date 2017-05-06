@@ -33,6 +33,5 @@ class ConfigurationServiceProvider extends AbstractServiceProvider
         )->withArgument('JGimeno\TaskReporter\Domain\Service\YamlParserInterface')->withArgument(
             __DIR__ . '/../../../config/settings.yml'
         );
-
     }
 }

@@ -12,13 +12,20 @@ class YamlWriterProvider implements YamlWriterInterface
 
     private $writer;
 
-
+    /**
+     * YamlWriterProvider constructor.
+     * @param Dumper $dumper
+     */
     public function __construct(Dumper $dumper)
     {
         $this->writer = $dumper;
     }
 
-/**
+    /**
+     * @param string $path
+     * @param array $array
+     * @return bool|int
+     * @throws YamlProviderException
      */
     public function write($path, $array)
     {
@@ -28,5 +35,4 @@ class YamlWriterProvider implements YamlWriterInterface
             throw new YamlProviderException($e->getMessage());
         }
     }
-
 }

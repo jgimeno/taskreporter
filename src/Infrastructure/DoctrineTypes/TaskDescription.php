@@ -38,6 +38,4 @@ class TaskDescription extends Type
     {
         return new TaskDescriptionValueObject($value);
     }
-
-
 }

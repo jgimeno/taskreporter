@@ -44,5 +44,4 @@ class CreateTask extends Command
 
         $output->writeln("Task added.");
     }
-
 }

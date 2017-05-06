@@ -2,15 +2,14 @@
 
 namespace JGimeno\TaskReporter\App\Console;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use JGimeno\TaskReporter\App\Command\DeleteTask as DeleteTaskCommand;
 use JGimeno\TaskReporter\App\Command\DeleteTaskHandler;
 use JGimeno\TaskReporter\App\Command\ListTasksHandler;
-use JGimeno\TaskReporter\Domain\Exception\EmptyWorkingDayException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-
 
 class DeleteTask extends Command
 {
@@ -49,7 +48,7 @@ class DeleteTask extends Command
         $output->writeln('You have just deleted: '.$taskDescription);
     }
 
-    protected function showTasksToDelete(InputInterface $input, OutputInterface $output, $tasks)
+    protected function showTasksToDelete(InputInterface $input, OutputInterface $output, ArrayCollection $tasks)
     {
         $helper = $this->getHelper('question');
 

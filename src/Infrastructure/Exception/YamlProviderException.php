@@ -8,5 +8,4 @@ class YamlProviderException extends InfrastructureException
     {
         $this->message = "Error with yaml provider: " . $message;
     }
-
 }

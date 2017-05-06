@@ -2,8 +2,6 @@
 
 namespace JGimeno\TaskReporter\App\Command;
 
-use JGimeno\TaskReporter\Domain\Entity\WorkingDay;
-
 class DeleteTask
 {
     /**
@@ -13,7 +11,6 @@ class DeleteTask
 
     /**
      * DeleteTask constructor.
-     * @param WorkingDay $workingDay
      * @param $description
      */
     public function __construct($description)
