@@ -8,5 +8,5 @@ interface ConfigurationProviderInterface
      * @param null $item
      * @return mixed
      */
-    public function getConfiguration($item = null);
+    public function getConfiguration($item);
 }

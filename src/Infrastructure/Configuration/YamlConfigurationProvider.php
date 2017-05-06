@@ -36,19 +36,18 @@ class YamlConfigurationProvider implements ConfigurationProviderInterface
     }
 
     /**
-     * @param null $item
+     * @param $item
      * @return mixed
      */
-    public function getConfiguration($item = null)
+    public function getConfiguration($item)
     {
         $this->initializeConfig($this->configFile);
 
-        return (is_null($item)) ? $this->config : $this->getConfigurationItem($item);
+        return $this->getConfigurationItem($item);
     }
 
     private function initializeConfig($configFile)
     {
-
         if ($this->config === null) {
             $this->config = $this->yamlParser->parse($configFile);
         }
@@ -72,7 +71,6 @@ class YamlConfigurationProvider implements ConfigurationProviderInterface
         }
 
         return $result;
-
     }
 
     private function checkMaxNesting($item)

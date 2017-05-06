@@ -32,8 +32,6 @@ class YamlConfigurationProviderTest extends \PHPUnit_Framework_TestCase
             ->with('settings.yml')
             ->willReturn($config);
 
-        $this->assertEquals($config, $yamlConfigProvider->getConfiguration());
-
         $this->assertEquals($config['db'], $yamlConfigProvider->getConfiguration('db'));
 
         $this->assertEquals($config['db']['entry_1'], $yamlConfigProvider->getConfiguration('db.entry_1'));

@@ -24,7 +24,6 @@ class SendReport extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-
             $commandHandler = $this
                 ->getContainer()
                 ->get('JGimeno\TaskReporter\App\Command\SendReportHandler');

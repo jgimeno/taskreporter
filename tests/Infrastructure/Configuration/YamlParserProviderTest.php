@@ -18,7 +18,6 @@ class YamlParserProviderTest extends \PHPUnit_Framework_TestCase
      */
     protected $root;
 
-
     protected function setUp()
     {
         parent::setUp();
@@ -43,9 +42,7 @@ class YamlParserProviderTest extends \PHPUnit_Framework_TestCase
     {
         $yamlParserProvider = new YamlParserProvider($this->mockParser);
 
-        vfsStream::newFile('config.yml', 0777)
-            ->withContent('this should be a yaml string')
-            ->at($this->root);
+        $this->createFileWithContent('config.yml', 'this should be a yaml string');
 
         $this->mockParser->expects($this->once())
             ->method('parse')
@@ -56,16 +53,13 @@ class YamlParserProviderTest extends \PHPUnit_Framework_TestCase
             array('result' => 'result'),
             $yamlParserProvider->parse(vfsStream::url('settings/config.yml'))
         );
-
     }
 
     public function testParseFailsWhenThereIsAProblemWithSymfonyYamlParser()
     {
         $yamlParserProvider = new YamlParserProvider($this->mockParser);
 
-        vfsStream::newFile('config.yml', 0777)
-            ->withContent('this should be a yaml string')
-            ->at($this->root);
+        $this->createFileWithContent('config.yml', 'this should be a yaml string');
 
         $this->mockParser->expects($this->once())
             ->method('parse')
@@ -77,4 +71,10 @@ class YamlParserProviderTest extends \PHPUnit_Framework_TestCase
         $yamlParserProvider->parse(vfsStream::url('settings/config.yml'));
     }
 
+    protected function createFileWithContent($fileName, $content)
+    {
+        vfsStream::newFile($fileName, 0777)
+            ->withContent($content)
+            ->at($this->root);
+    }
 }
