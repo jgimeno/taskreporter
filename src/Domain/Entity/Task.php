@@ -46,11 +46,12 @@ class Task
     private function extractTicket($description)
     {
         $output = null;
+        $this->ticket = "";
+
         preg_match('~' . self::TICKET_DELIMITER . '(.*?)' . self::TICKET_DELIMITER . '~', $description, $output);
+
         if (isset($output[1])) {
             $this->ticket = $output[1];
-        } else {
-            $this->ticket = "";
         }
     }
 
